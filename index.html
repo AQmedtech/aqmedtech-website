@@ -3,13 +3,2528 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="0; url=standalone.html">
-  <title>AQMedTech Innovations</title>
+  <title>AQMedTech Innovations | Web Dev • Health-Tech • Ads & Insights</title>
+  <meta name="description" content="We build high-performance websites, custom medical-grade health applications, and drive high-converting traffic to your business.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    window.location.href = "standalone.html" + window.location.hash;
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B132B',
+              dark: '#0F172A',
+              blue: '#2563EB',
+              blueHover: '#1D4ED8',
+              teal: '#0D9488',
+              tealLight: '#14B8A6',
+              emerald: '#059669',
+              amber: '#D97706',
+              amberLight: '#F59E0B'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    }
   </script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+  </style>
+
+  <!-- React 18 & Babel Standalone -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
-<body style="background:#0F172A;color:white;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;">
-  <p>Loading AQMedTech Innovations... If you are not redirected automatically, <a href="standalone.html" style="color:#2DD4BF;">click here</a>.</p>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col selection:bg-blue-600 selection:text-white">
+
+  <!-- React Mount Root -->
+  <div id="root">
+    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0F172A;color:white;font-family:sans-serif;">
+      <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#2563EB,#0D9488);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;margin-bottom:16px;">AQ</div>
+      <h1 style="font-size:24px;font-weight:900;margin:0 0 8px 0;">AQMedTech Innovations</h1>
+      <p style="color:#94A3B8;font-size:14px;margin:0;">Loading platform...</p>
+    </div>
+  </div>
+
+  <!-- COMPLETE APPLICATION SCRIPT -->
+  <script type="text/babel">
+    // =========================================================================
+    // 1. INLINE SVG ICONS (Self-contained, Zero Dependencies)
+    // =========================================================================
+    const Icons = {
+      Menu: ({ size=20, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      ),
+      X: ({ size=20, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      ),
+      Zap: ({ size=18, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+      ),
+      Monitor: ({ size=22, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+      ),
+      Activity: ({ size=22, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      ),
+      Code2: ({ size=22, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+      ),
+      TrendingUp: ({ size=22, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+      ),
+      Wrench: ({ size=18, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      ),
+      Globe: ({ size=18, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      ),
+      Eye: ({ size=12, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+      ),
+      MousePointer: ({ size=12, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>
+      ),
+      MessageCircle: ({ size=16, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+      ),
+      MessageSquare: ({ size=16, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      ),
+      Clock: ({ size=12, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      ),
+      Calendar: ({ size=12, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+      ),
+      Share2: ({ size=14, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+      ),
+      ChevronLeft: ({ size=16, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="m15 18-6-6 6-6"/></svg>
+      ),
+      CheckCircle: ({ size=20, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      ),
+      Send: ({ size=14, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      ),
+      ArrowRight: ({ size=16, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      ),
+      Lock: ({ size=18, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      ),
+      Shield: ({ size=18, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      ),
+      Search: ({ size=18, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      ),
+      Upload: ({ size=18, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+      ),
+      Info: ({ size=18, className="", ...props }) => (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      ),
+    };
+
+    // =========================================================================
+    // 2. DATA LAYER & SEED DATA
+    // =========================================================================
+    const SITE_CONFIG = {
+      whatsappNumber: "2348012345678",
+      adminPassword: "aqmedtech2024",      // Full Admin access
+      doctorPassword: "doctor2026",        // Doctor / Writer Invite Code
+      siteName: "AQMedTech Innovations",
+    };
+
+    const PORTFOLIO_PROJECTS = [
+      {
+        id: 1,
+        title: "PharmaQuiz AI",
+        subtitle: "Interactive Pharmacology Platform",
+        category: "Health-Tech",
+        description: "AI-powered pharmacology quiz app for medical students and pharmacy professionals. Features adaptive learning, drug interaction checkers, and performance analytics.",
+        techStack: ["React", "Node.js", "OpenAI API", "PostgreSQL"],
+        imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600",
+        featured: true,
+        year: 2024,
+      },
+      {
+        id: 2,
+        title: "ClinicFlow Patient Portal",
+        subtitle: "Seamless Healthcare Management",
+        category: "Health-Tech",
+        description: "Full telemedicine and patient management portal for private clinics. Includes appointment booking, teleconsultations, digital prescriptions, and payment integration.",
+        techStack: ["Next.js", "Supabase", "Tailwind", "Stripe"],
+        imageUrl: "https://images.unsplash.com/photo-1587351021355-a479a299d2f9?w=600",
+        featured: true,
+        year: 2024,
+      },
+      {
+        id: 3,
+        title: "Enterprise E-Commerce Suite",
+        subtitle: "High-Conversion B2B/B2C Platform",
+        category: "E-Commerce",
+        description: "Custom multi-vendor e-commerce platform with real-time inventory, automated invoicing, logistics tracking, and a CRM dashboard for a Lagos-based retail group.",
+        techStack: ["React", "Django", "Redis", "AWS S3"],
+        imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600",
+        featured: false,
+        year: 2023,
+      },
+      {
+        id: 4,
+        title: "AQMedTech Ecosystem",
+        subtitle: "The Platform You Are On Now",
+        category: "Full-Stack",
+        description: "The AQMedTech Innovations platform itself — a multi-pillar digital ecosystem combining a tech agency portfolio, product ad marketplace, and expert health-tech news hub.",
+        techStack: ["Next.js", "Supabase", "Tailwind CSS", "Vercel"],
+        imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600",
+        featured: true,
+        year: 2024,
+      },
+    ];
+
+    const SEED_ADS = [
+      {
+        id: 1,
+        title: "Premium Digital Blood Pressure Monitor",
+        price: "₦45,000",
+        priceUSD: "$28",
+        category: "Medical Equipment",
+        description: "Accurate upper-arm digital BP monitor with memory storage for 60 readings, irregular heartbeat detection, and large LCD display. Ideal for home and clinical use.",
+        sellerName: "HealthFirst Nigeria",
+        sellerWhatsapp: "2348012345678",
+        imageUrl: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600",
+        duration: "30 Days (Active)",
+        views: 234,
+        clicks: 45,
+        featured: true,
+      },
+      {
+        id: 2,
+        title: "3M Littmann Classic III Diagnostic Stethoscope",
+        price: "₦95,000",
+        priceUSD: "$60",
+        category: "Medical Equipment",
+        description: "High acoustic sensitivity for performing general physical assessments. Features dual-tunable diaphragms and next-generation tubing. Ideal for medical students and consultants.",
+        sellerName: "MedEquip Direct Lagos",
+        sellerWhatsapp: "2348098765432",
+        imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600",
+        duration: "30 Days (Active)",
+        views: 412,
+        clicks: 78,
+        featured: true,
+      },
+      {
+        id: 3,
+        title: "Clinical Hospital Management Software (EMR)",
+        price: "From ₦250,000",
+        priceUSD: "From $160",
+        category: "Software & Digital Services",
+        description: "Cloud-based Clinic & Hospital EMR system. Includes patient billing, pharmacy inventory, lab results routing, and HMO claims management with 24/7 technical support.",
+        sellerName: "AQMedTech Systems",
+        sellerWhatsapp: "2348012345678",
+        imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600",
+        duration: "Active Partner",
+        views: 310,
+        clicks: 58,
+        featured: true,
+      },
+      {
+        id: 4,
+        title: "Portable Fingertip Pulse Oximeter with OLED Display",
+        price: "₦18,500",
+        priceUSD: "$12",
+        category: "Health & Wellness",
+        description: "Quickly measures SpO2 oxygen saturation and pulse rate. Battery operated with auto power-off. Tested and certified for clinics and personal home monitoring.",
+        sellerName: "CarePoint Diagnostics",
+        sellerWhatsapp: "2348123456789",
+        imageUrl: "https://images.unsplash.com/photo-1584017911766-d451b3d0e843?w=600",
+        duration: "14 Days (Active)",
+        views: 289,
+        clicks: 41,
+        featured: false,
+      },
+      {
+        id: 5,
+        title: "Apple Watch Series 9 (ECG & Blood Oxygen Sensor)",
+        price: "₦380,000",
+        priceUSD: "$240",
+        category: "Tech & Office Gadgets",
+        description: "Powerful health smartwatch featuring certified ECG app, fall detection, crash detection, and fitness tracking. Brand new sealed unit with 1-year warranty.",
+        sellerName: "TechHub Ikeja",
+        sellerWhatsapp: "2347012345678",
+        imageUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600",
+        duration: "30 Days (Active)",
+        views: 520,
+        clicks: 94,
+        featured: true,
+      },
+    ];
+
+    const SEED_ARTICLES = [
+      {
+        id: 1,
+        title: "Understanding Hypertension: A Silent Threat Every Nigerian Should Know",
+        category: "Health & Medicine",
+        authorName: "Dr. Amina Bello",
+        authorCredential: "MBBS, MPH — Cardiologist, Lagos University Teaching Hospital",
+        authorRole: "verified-doctor",
+        authorBio: "Consultant Cardiologist at LUTH with over 12 years of clinical research experience focusing on cardiovascular risk mitigation and hypertension control across Sub-Saharan Africa.",
+        authorLinkedin: "https://linkedin.com",
+        status: "approved",
+        readTime: "8 min",
+        date: "Nov 5, 2024",
+        coverImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800",
+        content: `Hypertension, commonly known as high blood pressure, is one of the most dangerous yet underdiagnosed conditions affecting Nigerians today. It occurs when the force of blood pushing against the walls of your arteries is consistently too high — typically defined as a reading of 140/90 mmHg or above. What makes hypertension particularly treacherous is that it rarely announces itself. Most people feel perfectly fine for years while the condition silently damages their heart, kidneys, eyes, and blood vessels. This is why cardiologists and public health experts refer to it as "the silent killer." By the time symptoms appear — if they appear at all — serious organ damage may already have occurred.
+
+The burden of hypertension in Nigeria is alarming and growing. Studies published in the Nigerian Journal of Cardiology estimate that over 38% of Nigerian adults are hypertensive, yet fewer than a third of them are aware of their condition. The situation is compounded by limited access to routine health screenings, particularly in rural areas, and a cultural tendency to seek medical care only when symptoms become severe. With a population of over 200 million, this means tens of millions of Nigerians are walking around with dangerously high blood pressure and have no idea. The economic and social cost — in strokes, heart attacks, and kidney failure — is enormous.
+
+Several risk factors are especially prevalent in the Nigerian context. High dietary salt intake is a major culprit; many traditional Nigerian dishes are prepared with significant amounts of sodium, and processed foods are increasingly popular in urban areas. Chronic stress — from economic pressures, long commutes, job insecurity, and family responsibilities — is another powerful driver that is often dismissed as simply "life." Genetics also plays a significant role; if one or both of your parents had hypertension, your risk is substantially higher. Other contributors include physical inactivity, obesity, excessive alcohol consumption, and tobacco use.
+
+What symptoms should you watch for? The frustrating truth is that most people experience no symptoms at all. Some may notice occasional headaches, particularly at the back of the head in the mornings, mild dizziness, nosebleeds, or a feeling of pressure behind the eyes. However, these symptoms are non-specific and easily attributed to other causes. The only reliable way to know your blood pressure is to measure it. Adults should have their blood pressure checked at least once every year, and more frequently if they have risk factors. Home blood pressure monitors are now widely available and affordable in Nigeria, making regular self-monitoring a realistic option for many families.
+
+The good news is that hypertension is both preventable and manageable. Lifestyle changes can make a tremendous difference: reducing salt intake, eating more fruits, vegetables, and whole grains, exercising for at least 30 minutes most days of the week, maintaining a healthy weight, limiting alcohol, and quitting smoking. Managing stress through prayer, leisure activities, adequate sleep, and social support is equally important. For many patients, however, lifestyle changes alone are not enough, and antihypertensive medications prescribed by a doctor become necessary. If you are over 35 or have not had your blood pressure checked recently, please see a healthcare provider. Early detection saves lives.`,
+        comments: [
+          {
+            id: 1,
+            name: "Fatima Aliyu",
+            text: "Thank you Doctor. My father was recently diagnosed with high blood pressure and we didn't know the symptoms until it was bad. How often should he check his BP at home?",
+            date: "Nov 6, 2024",
+            authorReply: "Thank you for reaching out, Fatima. For someone newly diagnosed, checking BP twice daily — morning before meals and evening — is ideal. Keep a log to share with his doctor. Also ensure he's taking his medications consistently and reducing his salt and stress levels.",
+          },
+          {
+            id: 2,
+            name: "Emeka Okonkwo",
+            text: "This is very educating! I had no idea hypertension can run in families. Should I start monitoring mine even though I'm only 32?",
+            date: "Nov 7, 2024",
+            authorReply: null,
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: "How AI is Revolutionizing Healthcare in West Africa",
+        category: "Tech & Innovation",
+        authorName: "Mr. Chukwudi Okafor",
+        authorCredential: "MSc Computer Science — HealthTech Writer & Digital Health Consultant",
+        authorRole: "tech-contributor",
+        authorBio: "Health-tech engineer and founder specializing in clinical decision support systems and telemedicine interoperability for African healthcare providers.",
+        authorLinkedin: "https://linkedin.com",
+        status: "approved",
+        readTime: "6 min",
+        date: "Nov 3, 2024",
+        coverImage: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800",
+        content: `Artificial intelligence is no longer a futuristic concept confined to Silicon Valley labs — it is actively reshaping healthcare delivery across West Africa. From AI-powered diagnostic tools that can detect tuberculosis and malaria from chest X-rays and microscopy slides, to intelligent chatbots triaging patients before they set foot in a clinic, the technology is arriving faster than many anticipated. In a region historically underserved by healthcare infrastructure, AI is not merely an upgrade; it is in many cases filling critical gaps left by a severe shortage of specialists and diagnostic equipment.
+
+Nigeria's digital health startup ecosystem has matured remarkably over the past five years. Companies like MDaaS Global are deploying affordable, tech-enabled diagnostic centres in underserved communities, while platforms like Helium Health are digitizing hospital records for over 500 health facilities. Ubenwa, a startup that uses AI to analyze infant cry patterns to detect birth asphyxia, has garnered global recognition for its life-saving potential.
+
+Diagnostic AI represents one of the most exciting frontiers. Tools trained on vast datasets of medical images can now identify diabetic retinopathy from fundus photographs and flag abnormal ECG readings with accuracy comparable to experienced clinicians. As infrastructure improves, AI-powered healthcare in West Africa will pioneer solutions uniquely suited to emerging markets.`,
+        comments: [
+          {
+            id: 4,
+            name: "Dr. Yemi Coker",
+            text: "Excellent overview! AI is especially promising for radiology interpretation where we have a severe shortage of specialists in Nigeria.",
+            date: "Nov 4, 2024",
+            authorReply: "Great point, Dr. Coker! Tools like Zipline and MDaaS are already paving the way.",
+          },
+        ],
+      },
+    ];
+
+    function loadData(key, fallback) {
+      try {
+        const stored = localStorage.getItem(key);
+        return stored ? JSON.parse(stored) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function saveData(key, data) {
+      try {
+        localStorage.setItem(key, JSON.stringify(data));
+      } catch (e) {
+        console.error('Failed to save data:', e);
+      }
+    }
+
+    function initializeData() {
+      // Version 2 initialization ensures new schema items (Medical Equipment, Author Bios, Review Status) take immediate effect
+      if (localStorage.getItem('aqmt_schema_version') !== '2.0') {
+        saveData('aqmt_ads', SEED_ADS);
+        saveData('aqmt_articles', SEED_ARTICLES);
+        saveData('aqmt_portfolio', PORTFOLIO_PROJECTS);
+        localStorage.setItem('aqmt_schema_version', '2.0');
+        localStorage.setItem('aqmt_initialized', 'true');
+      }
+    }
+
+    // =========================================================================
+    // 3. REACT COMPONENTS
+    // =========================================================================
+
+    // --- CLEAN PUBLIC NAVBAR (3 Public Links Only, No Admin Button) ---
+    const Navbar = ({ currentPage, onNavigate, onOpenModal }) => {
+      const [mobileOpen, setMobileOpen] = React.useState(false);
+      const { Menu, X, Zap } = Icons;
+      
+      // Clean, professional public navigation links
+      const navLinks = [
+        { id: 'home', label: 'Home & Services' },
+        { id: 'marketplace', label: 'Marketplace Ads' },
+        { id: 'news', label: 'Health & Tech News' },
+      ];
+
+      return (
+        <nav className="fixed top-0 left-0 right-0 z-50" style={{background:'rgba(15,23,42,0.96)', backdropFilter:'blur(12px)'}}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="flex items-center justify-between h-16">
+              {/* Brand Logo */}
+              <div className="flex items-center gap-2 cursor-pointer" onClick={() => onNavigate('home')}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-black text-xs" style={{background:'linear-gradient(135deg,#2563EB,#0D9488)'}}>
+                  AQ
+                </div>
+                <div>
+                  <span className="text-white font-black text-lg tracking-tight">AQMedTech</span>
+                  <div className="text-xs font-medium hidden sm:block" style={{color:'#0D9488'}}>Web Dev • Health-Tech • Ads & Insights</div>
+                </div>
+              </div>
+
+              {/* Public Desktop Navigation */}
+              <div className="hidden md:flex items-center gap-1">
+                {navLinks.map(link => (
+                  <button
+                    key={link.id}
+                    onClick={() => onNavigate(link.id)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      currentPage === link.id
+                        ? 'text-white border-b-2 border-teal-400 bg-white/5 font-bold'
+                        : 'text-slate-300 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Primary Call to Action */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => onOpenModal('website')}
+                  className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 shadow-lg"
+                  style={{background:'linear-gradient(135deg,#2563EB,#1D4ED8)'}}
+                >
+                  <Zap size={14} />
+                  Hire Us / Advertise
+                </button>
+                <button
+                  className="md:hidden text-white p-2"
+                  onClick={() => setMobileOpen(!mobileOpen)}
+                >
+                  {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Drawer */}
+          {mobileOpen && (
+            <div className="md:hidden border-t border-white/10 px-4 pb-4 pt-2 shadow-2xl" style={{background:'rgba(11,19,43,0.98)'}}>
+              {navLinks.map(link => (
+                <button
+                  key={link.id}
+                  onClick={() => { onNavigate(link.id); setMobileOpen(false); }}
+                  className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium my-1 transition-all ${
+                    currentPage === link.id
+                      ? 'text-white bg-blue-600/30 text-teal-300 font-bold'
+                      : 'text-slate-300 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {link.label}
+                </button>
+              ))}
+              <button
+                onClick={() => { onOpenModal('website'); setMobileOpen(false); }}
+                className="w-full mt-2 px-4 py-3 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-2"
+                style={{background:'linear-gradient(135deg,#2563EB,#1D4ED8)'}}
+              >
+                <Zap size={14} /> Hire Us / Advertise
+              </button>
+            </div>
+          )}
+        </nav>
+      );
+    };
+
+    // --- HERO ---
+    const Hero = ({ onOpenModal, onNavigate }) => {
+      return (
+        <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-12 pb-20 text-white" style={{ background: '#0F172A' }}>
+          <div className="absolute inset-0 z-0 pointer-events-none" style={{
+            background: 'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(37,99,235,0.22) 0%, rgba(13,148,136,0.12) 50%, transparent 100%)'
+          }} />
+
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center gap-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide border border-blue-500/30 bg-blue-500/10 text-blue-300">
+              <span className="w-2 h-2 rounded-full bg-teal-400 inline-block animate-ping" />
+              Nigeria's Premier Health-Tech Agency & Ad Platform
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-4xl">
+              We Build <span style={{
+                background: 'linear-gradient(90deg,#60A5FA,#2DD4BF)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>High-Performance Websites,</span> Custom Health Apps & Drive Traffic.
+            </h1>
+
+            <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl leading-relaxed">
+              From full-stack software engineering and medical-grade digital apps to high-traffic product advertising—AQMedTech turns your vision into reality.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 mt-2">
+              <button
+                onClick={() => onOpenModal('website')}
+                className="px-8 py-4 rounded-2xl font-bold text-white text-base shadow-xl hover:scale-105 transition-all"
+                style={{ background: 'linear-gradient(135deg,#2563EB,#1D4ED8)' }}
+              >
+                🚀 Request a Website / App
+              </button>
+              <button
+                onClick={() => onOpenModal('advertise')}
+                className="px-8 py-4 rounded-2xl font-bold text-teal-300 text-base border-2 border-teal-500/40 hover:bg-teal-500/10 transition-all"
+              >
+                📢 Advertise Your Product
+              </button>
+            </div>
+
+            {/* Trust Stats Bar */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+              {[
+                'Full-Stack Web & Mobile',
+                'Health-Tech Specialists',
+                '24/7 App Maintenance',
+                'High-Traffic Ad Network'
+              ].map((stat, i) => (
+                <span
+                  key={i}
+                  className="px-4 py-2 rounded-full text-xs sm:text-sm text-slate-200 font-medium border border-white/10 bg-white/5 backdrop-blur-sm"
+                >
+                  ✅ {stat}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // --- SERVICES ---
+    const Services = ({ onOpenModal }) => {
+      const { Monitor, Activity, Code2, TrendingUp } = Icons;
+      const services = [
+        {
+          icon: Monitor,
+          color: '#2563EB',
+          title: 'Custom Website Development',
+          desc: 'Corporate sites, e-commerce stores, landing pages & portals tailored to your brand identity and conversion goals.',
+          type: 'website'
+        },
+        {
+          icon: Activity,
+          color: '#0D9488',
+          title: 'Health Application Development',
+          desc: 'Telemedicine platforms, clinic management systems, pharmacy apps, medical education tools & patient portals.',
+          type: 'healthapp'
+        },
+        {
+          icon: Code2,
+          color: '#7C3AED',
+          title: 'Full-Stack Engineering & Maintenance',
+          desc: 'Complete web applications, API architecture, database design, security hardening & 24/7 server maintenance.',
+          type: 'maintenance'
+        },
+        {
+          icon: TrendingUp,
+          color: '#D97706',
+          title: 'Product & Business Advertising',
+          desc: 'Promote your products & brand to thousands of AQMedTech daily visitors with premium sponsored placements.',
+          type: 'advertise'
+        },
+      ];
+
+      return (
+        <section className="bg-white py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-14">
+              <span className="text-xs font-bold tracking-widest uppercase mb-3 px-3 py-1 rounded-full text-teal-700 bg-teal-50 border border-teal-200">
+                OUR CORE SERVICES
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mt-2">
+                Transform Your Digital Vision
+              </h2>
+              <p className="text-slate-500 text-base mt-2 max-w-xl mx-auto">
+                End-to-end digital solutions for healthcare innovators and businesses ready to grow.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {services.map((svc, i) => {
+                const IconComponent = svc.icon;
+                return (
+                  <div
+                    key={i}
+                    className="bg-white rounded-2xl p-6 border border-slate-200 hover:shadow-xl hover:border-blue-400 transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-5" style={{ background: svc.color }}>
+                        <IconComponent size={24} />
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-900 mb-2">{svc.title}</h3>
+                      <p className="text-slate-600 text-sm leading-relaxed">{svc.desc}</p>
+                    </div>
+                    <button
+                      onClick={() => onOpenModal(svc.type)}
+                      className="mt-6 text-sm font-semibold text-blue-600 hover:text-blue-800 text-left transition-colors flex items-center gap-1"
+                    >
+                      Book This Service →
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // --- PORTFOLIO ---
+    const Portfolio = ({ projects, onOpenModal }) => {
+      return (
+        <section className="bg-slate-50 py-20 border-t border-slate-200">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-14">
+              <span className="text-xs font-bold tracking-widest uppercase mb-3 px-3 py-1 rounded-full text-blue-700 bg-blue-50 border border-blue-200">
+                PROVEN RESULTS
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mt-2">
+                Featured Portfolio Projects
+              </h2>
+              <p className="text-slate-500 text-base mt-2 max-w-xl mx-auto">
+                Production-grade applications built for healthcare and commercial clients.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {(projects || []).map((project) => (
+                <div
+                  key={project.id}
+                  className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all border border-slate-200 flex flex-col"
+                >
+                  <div className="relative h-56 w-full bg-slate-900 overflow-hidden">
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                      {project.category}
+                    </div>
+                  </div>
+                  <div className="p-6 flex flex-col flex-1 justify-between">
+                    <div>
+                      <h3 className="text-xl font-black text-slate-900 mb-1">{project.title}</h3>
+                      <p className="text-xs text-blue-600 font-semibold mb-3">{project.subtitle}</p>
+                      <p className="text-slate-600 text-sm leading-relaxed mb-4">{project.description}</p>
+                      <div className="flex flex-wrap gap-1.5 mb-6">
+                        {(project.techStack || []).map((tech, idx) => (
+                          <span key={idx} className="bg-slate-100 text-slate-700 text-xs px-2.5 py-1 rounded-md font-medium">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => onOpenModal('website')}
+                      className="w-full py-2.5 rounded-xl border border-blue-600 text-blue-600 font-semibold text-sm hover:bg-blue-600 hover:text-white transition-colors"
+                    >
+                      Request a Similar App →
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // --- AD CARD ---
+    const AdCard = ({ ad, onWhatsAppClick }) => {
+      const { Eye, MousePointer, MessageCircle } = Icons;
+      const handleWA = () => {
+        const msg = encodeURIComponent(`Hi! I saw "${ad.title}" on AQMedTech (priced at ${ad.price}) and I'm interested. Please share more details.`);
+        window.open(`https://wa.me/${ad.sellerWhatsapp}?text=${msg}`, '_blank');
+        if (onWhatsAppClick) onWhatsAppClick(ad.id);
+      };
+
+      return (
+        <div className="relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all border border-slate-200 overflow-hidden flex flex-col justify-between">
+          <div>
+            <div className="relative h-48 bg-slate-100 overflow-hidden">
+              <span className="absolute top-3 left-3 z-10 px-2.5 py-0.5 rounded-full text-xs font-bold text-white bg-amber-600 shadow">
+                Sponsored
+              </span>
+              <img
+                src={ad.imageUrl}
+                alt={ad.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-5">
+              <div className="flex items-baseline justify-between gap-2 mb-2">
+                <span className="text-blue-700 font-black text-xl">{ad.price}</span>
+                {ad.priceUSD && <span className="text-slate-400 text-xs font-semibold">({ad.priceUSD})</span>}
+              </div>
+              <h3 className="font-bold text-slate-900 text-base leading-tight mb-2 line-clamp-1">{ad.title}</h3>
+              <p className="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-2">{ad.description}</p>
+              <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
+                <span>Sold by: <strong className="font-semibold text-slate-700">{ad.sellerName}</strong></span>
+                {ad.duration && (
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
+                    ⏱️ {ad.duration}
+                  </span>
+                )}
+              </div>
+              <div className="flex gap-4 text-xs text-slate-400">
+                <span className="flex items-center gap-1"><Eye size={12} /> {ad.views} views</span>
+                <span className="flex items-center gap-1"><MousePointer size={12} /> {ad.clicks} clicks</span>
+              </div>
+            </div>
+          </div>
+          <div className="p-5 pt-0">
+            <button
+              onClick={handleWA}
+              className="w-full py-2.5 rounded-xl font-bold text-sm text-white flex items-center justify-center gap-2 hover:opacity-95 transition-all shadow"
+              style={{ background: '#25D366' }}
+            >
+              <MessageCircle size={16} />
+              Buy / Inquire via WhatsApp
+            </button>
+          </div>
+        </div>
+      );
+    };
+
+    // --- MINI AD CARD ---
+    const MiniAdCard = ({ ad, onWhatsAppClick }) => {
+      if (!ad) return null;
+      const { MessageCircle } = Icons;
+      const handleWA = () => {
+        const msg = encodeURIComponent(`Hi! I saw "${ad.title}" on AQMedTech and I'm interested.`);
+        window.open(`https://wa.me/${ad.sellerWhatsapp}?text=${msg}`, '_blank');
+        if (onWhatsAppClick) onWhatsAppClick(ad.id);
+      };
+
+      return (
+        <div className="flex items-center gap-3 bg-white rounded-2xl shadow-sm border border-slate-200 p-3 hover:shadow-md transition-all">
+          <div className="relative flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden bg-slate-100">
+            <span className="absolute top-1 left-1 px-1.5 py-0.5 rounded text-[9px] font-bold text-white bg-amber-600">
+              AD
+            </span>
+            <img src={ad.imageUrl} alt={ad.title} className="w-full h-full object-cover" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-[10px] text-amber-600 font-bold uppercase tracking-wider">Featured Marketplace Item</p>
+            <h4 className="font-bold text-slate-900 text-sm truncate">{ad.title}</h4>
+            <p className="text-blue-700 font-black text-sm">{ad.price}</p>
+          </div>
+          <button
+            onClick={handleWA}
+            className="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-semibold text-white flex items-center gap-1 shadow"
+            style={{ background: '#25D366' }}
+          >
+            <MessageCircle size={14} /> Buy
+          </button>
+        </div>
+      );
+    };
+
+    // --- MARKETPLACE PAGE ---
+    const MarketplacePage = ({ ads, onUpdateAds, onOpenModal }) => {
+      const [activeCategory, setActiveCategory] = React.useState('All');
+      const [searchQuery, setSearchQuery] = React.useState('');
+      const { Search } = Icons;
+      const categories = ['All', 'Medical Equipment', 'Health & Wellness', 'Tech & Office Gadgets', 'Software & Digital Services'];
+
+      const filteredAds = ads.filter(ad => {
+        const matchesCategory = activeCategory === 'All' || ad.category === activeCategory;
+        const matchesSearch = !searchQuery.trim() || 
+          ad.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          ad.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          ad.sellerName.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      });
+
+      const handleWhatsAppClick = (adId) => {
+        const updated = ads.map(ad =>
+          ad.id === adId ? { ...ad, clicks: (ad.clicks || 0) + 1 } : ad
+        );
+        if (onUpdateAds) onUpdateAds(updated);
+      };
+
+      return (
+        <div className="min-h-screen bg-slate-50">
+          <div className="py-12 px-4 text-white text-center" style={{ background: '#0F172A' }}>
+            <div className="max-w-4xl mx-auto">
+              <span className="text-xs font-bold text-amber-400 tracking-wider uppercase bg-amber-950 px-3 py-1 rounded-full border border-amber-800">
+                AQMedTech Verified Marketplace
+              </span>
+              <h1 className="text-3xl sm:text-4xl font-black mt-3 mb-2">🛍️ Featured Products & Business Ads</h1>
+              <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-6">
+                Discover medical devices, gadgets, and verified services. Click any item to chat directly with the seller on WhatsApp.
+              </p>
+
+              {/* Instant Search Bar */}
+              <div className="max-w-lg mx-auto relative">
+                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Search products, equipment, sellers (e.g. BP Monitor, Stethoscope)..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white/10 backdrop-blur-md text-white placeholder-slate-400 border border-white/20 focus:border-amber-400 focus:bg-white/20 focus:outline-none text-sm transition-all shadow-lg"
+                />
+                {searchQuery && (
+                  <button onClick={() => setSearchQuery('')} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-300 hover:text-white bg-white/10 px-2 py-0.5 rounded-full">
+                    Clear
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="sticky top-16 z-30 bg-white border-b border-slate-200 shadow-sm px-4 py-3">
+            <div className="max-w-7xl mx-auto flex gap-2 overflow-x-auto">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+                    activeCategory === cat
+                      ? 'bg-blue-600 text-white shadow'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:border-blue-400'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 py-10">
+            {filteredAds.length === 0 ? (
+              <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 p-8 max-w-xl mx-auto shadow-sm mb-10">
+                <div className="text-4xl mb-3">🔍</div>
+                <h3 className="text-lg font-bold text-slate-900 mb-1">No products found</h3>
+                <p className="text-xs text-slate-500 mb-4">No marketplace items match "{searchQuery}" in {activeCategory}.</p>
+                <button
+                  onClick={() => { setSearchQuery(''); setActiveCategory('All'); }}
+                  className="px-4 py-2 bg-blue-50 text-blue-700 rounded-xl text-xs font-bold hover:bg-blue-100"
+                >
+                  Reset Filter & Search
+                </button>
+              </div>
+            ) : null}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredAds.map(ad => (
+                <AdCard key={ad.id} ad={ad} onWhatsAppClick={handleWhatsAppClick} />
+              ))}
+
+              <div className="rounded-2xl border-2 border-dashed border-blue-400 bg-gradient-to-br from-blue-50 to-teal-50 flex flex-col items-center justify-center p-8 text-center min-h-[340px]">
+                <div className="text-4xl mb-3">🚀</div>
+                <h3 className="text-xl font-black text-slate-900 mb-2">Advertise Your Product Here</h3>
+                <p className="text-slate-600 text-sm mb-5 leading-relaxed">
+                  Reach thousands of daily health practitioners, tech enthusiasts & buyers. <br/>
+                  <strong className="text-blue-700">Slots start from ₦10,000 / week.</strong>
+                </p>
+                <button
+                  onClick={() => onOpenModal('advertise')}
+                  className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors shadow-lg"
+                >
+                  Place Your Ad Now →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- ARTICLE CARD ---
+    const ArticleCard = ({ article, onClick }) => {
+      const { Clock, Calendar, MessageSquare } = Icons;
+      const initials = article.authorName.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
+      const authorBg = article.authorRole === 'verified-doctor' ? '#0D9488' : '#2563EB';
+
+      return (
+        <div
+          onClick={onClick}
+          className="bg-white rounded-2xl shadow-md hover:shadow-xl cursor-pointer transition-all border border-slate-200 overflow-hidden flex flex-col group justify-between"
+        >
+          <div>
+            <div className="relative h-48 bg-slate-900 overflow-hidden">
+              <img
+                src={article.coverImage}
+                alt={article.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow">
+                {article.category}
+              </span>
+            </div>
+            <div className="p-5">
+              <h3 className="font-black text-slate-900 text-lg leading-snug mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                {article.title}
+              </h3>
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0" style={{background: authorBg}}>
+                  {initials}
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-slate-900 text-xs truncate">{article.authorName}</p>
+                  <p className="text-[10px] text-slate-400 truncate">{article.authorCredential}</p>
+                </div>
+                {article.authorRole === 'verified-doctor' && (
+                  <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-200">
+                    ✅ Doctor
+                  </span>
+                )}
+              </div>
+              <p className="text-slate-500 text-xs leading-relaxed line-clamp-3 mb-4">
+                {(article.content || '').substring(0, 160)}...
+              </p>
+            </div>
+          </div>
+          <div className="p-5 pt-0 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+            <span className="flex items-center gap-1"><Clock size={12} /> {article.readTime}</span>
+            <span className="flex items-center gap-1"><Calendar size={12} /> {article.date}</span>
+            <span className="flex items-center gap-1"><MessageSquare size={12} /> {(article.comments || []).length}</span>
+          </div>
+        </div>
+      );
+    };
+
+    // --- ARTICLE READER (Public Comments + Doctor Replies) ---
+    const ArticleReader = ({ article, ads, onBack, onUpdateArticle, onOpenModal }) => {
+      const [comments, setComments] = React.useState(article.comments || []);
+      const [newComment, setNewComment] = React.useState({ name: '', text: '' });
+      const [submitted, setSubmitted] = React.useState(false);
+      const { Share2, ChevronLeft, MessageSquare, CheckCircle } = Icons;
+
+      const shareMsg = encodeURIComponent(`📰 "${article.title}" — Read this medical & tech article on AQMedTech!`);
+      const handleShare = () => window.open(`https://wa.me/?text=${shareMsg}`, '_blank');
+
+      const handleComment = (e) => {
+        e.preventDefault();
+        if (!newComment.name.trim() || !newComment.text.trim()) return;
+        const comment = {
+          id: Date.now(),
+          name: newComment.name,
+          text: newComment.text,
+          date: 'Just now',
+          authorReply: null
+        };
+        const updated = [...comments, comment];
+        setComments(updated);
+        if (onUpdateArticle) onUpdateArticle({ ...article, comments: updated });
+        setNewComment({ name: '', text: '' });
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 3000);
+      };
+
+      const paragraphs = (article.content || '').split('\n\n').filter(p => p.trim());
+      const featuredAd = ads && ads[0];
+
+      return (
+        <div className="min-h-screen bg-slate-50 pb-20">
+          <div className="bg-white border-b border-slate-200 sticky top-16 z-30 px-4 py-3 shadow-sm">
+            <div className="max-w-4xl mx-auto flex items-center justify-between">
+              <button onClick={onBack} className="flex items-center gap-1 text-slate-600 hover:text-blue-600 font-semibold text-sm">
+                <ChevronLeft size={16} /> Back to News Feed
+              </button>
+              <button onClick={handleShare} className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-white shadow" style={{background:'#25D366'}}>
+                <Share2 size={14} /> Share on WhatsApp
+              </button>
+            </div>
+          </div>
+
+          <div className="max-w-4xl mx-auto px-4 pt-8">
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-100 text-teal-800">
+              {article.category}
+            </span>
+            <h1 className="text-3xl sm:text-4xl font-black text-slate-900 leading-tight mt-3 mb-4">
+              {article.title}
+            </h1>
+            <div className="flex items-center gap-3 pb-6 border-b border-slate-200">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-black text-base" style={{background: article.authorRole === 'verified-doctor' ? '#0D9488' : '#2563EB'}}>
+                {article.authorName.substring(0,2).toUpperCase()}
+              </div>
+              <div>
+                <p className="font-bold text-slate-900 text-sm sm:text-base">{article.authorName}</p>
+                <p className="text-xs text-slate-500">{article.authorCredential}</p>
+                <div className="flex items-center gap-2 mt-1 text-xs text-slate-400">
+                  {article.authorRole === 'verified-doctor' && (
+                    <span className="font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200">
+                      ✅ Verified Doctor
+                    </span>
+                  )}
+                  <span>· {article.date} · {article.readTime} read</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="my-6 rounded-2xl overflow-hidden shadow-lg h-72 sm:h-96 bg-slate-900">
+              <img src={article.coverImage} alt={article.title} className="w-full h-full object-cover" />
+            </div>
+
+            {/* Legal Medical & Technical Disclaimer */}
+            <div className="my-6 p-4 rounded-2xl bg-amber-50/70 border border-amber-200 text-amber-900 flex items-start gap-3">
+              <span className="text-xl flex-shrink-0">⚖️</span>
+              <div className="text-xs leading-relaxed">
+                <strong className="font-bold text-amber-950 block mb-0.5">AQMedTech Editorial & Medical Disclaimer:</strong>
+                The insights and recommendations presented here are solely for informational, preventive, and educational awareness. They do not constitute a clinical diagnosis, surgical advisory, or medical prescription. Always consult a verified healthcare professional for personal medical conditions.
+              </div>
+            </div>
+
+            <div className="prose max-w-none text-slate-700 leading-relaxed text-base sm:text-lg space-y-5">
+              {paragraphs.map((p, idx) => (
+                <React.Fragment key={idx}>
+                  <p>{p}</p>
+                  {idx === 1 && (
+                    <div className="my-8 space-y-4 not-prose">
+                      {featuredAd && <MiniAdCard ad={featuredAd} />}
+                      <div className="p-6 rounded-2xl text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl" style={{background:'linear-gradient(135deg,#0F172A,#1e3a5f)'}}>
+                        <div>
+                          <h4 className="font-black text-lg">Need a Custom Website or Health App?</h4>
+                          <p className="text-slate-300 text-xs sm:text-sm">AQMedTech Innovations builds medical-grade digital platforms & e-commerce suites.</p>
+                        </div>
+                        <button onClick={() => onOpenModal('website')} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap shadow">
+                          Hire Agency →
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+
+            {/* Author Profile Bio Box */}
+            <div className="my-8 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-start gap-4">
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-lg flex-shrink-0" style={{background: article.authorRole === 'verified-doctor' ? '#0D9488' : '#2563EB'}}>
+                  {article.authorName.substring(0,2).toUpperCase()}
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h4 className="font-bold text-slate-900 text-base">{article.authorName}</h4>
+                    {article.authorRole === 'verified-doctor' ? (
+                      <span className="text-[10px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200">
+                        🩺 Doctor
+                      </span>
+                    ) : (
+                      <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                        💻 Tech Lead
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs font-semibold text-slate-500 mb-2">{article.authorCredential}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed max-w-xl">
+                    {article.authorBio || "Specialist contributor publishing clinical research and digital technology insights on the AQMedTech platform."}
+                  </p>
+                </div>
+              </div>
+              <div className="flex sm:flex-col gap-2 w-full sm:w-auto">
+                <button
+                  onClick={handleShare}
+                  className="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-1.5 shadow"
+                  style={{background:'#25D366'}}
+                >
+                  <Share2 size={13} /> Share Story
+                </button>
+              </div>
+            </div>
+
+            <div className="my-8 p-5 rounded-2xl bg-green-50 border border-green-200 flex items-center justify-between">
+              <div>
+                <p className="font-bold text-slate-900 text-sm">Did you learn something valuable?</p>
+                <p className="text-xs text-slate-500">Share this expert advisory with your WhatsApp contacts.</p>
+              </div>
+              <button onClick={handleShare} className="px-4 py-2 rounded-xl text-xs font-bold text-white shadow" style={{background:'#25D366'}}>
+                Share to WhatsApp
+              </button>
+            </div>
+
+            {/* Comments (Open to all visitors) */}
+            <div className="mt-12 pt-8 border-t border-slate-200">
+              <h3 className="text-2xl font-black text-slate-900 mb-6 flex items-center gap-2">
+                <MessageSquare size={22} className="text-blue-600" />
+                Reader Questions & Discussion ({comments.length})
+              </h3>
+
+              <div className="space-y-4 mb-8">
+                {comments.map((c) => (
+                  <div key={c.id} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="font-bold text-slate-900 text-sm">{c.name}</p>
+                      <span className="text-[10px] text-slate-400">{c.date}</span>
+                    </div>
+                    <p className="text-slate-700 text-sm leading-relaxed">{c.text}</p>
+                    {c.authorReply && (
+                      <div className="mt-3 p-3 rounded-xl bg-teal-50 border-l-4 border-teal-600">
+                        <p className="text-xs font-bold text-teal-800 mb-1">✅ Verified Author / Doctor Response:</p>
+                        <p className="text-slate-700 text-xs leading-relaxed">{c.authorReply}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Add Comment Form */}
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h4 className="font-bold text-slate-900 text-base mb-3">Ask a Question or Leave a Comment</h4>
+                {submitted && (
+                  <div className="mb-4 p-3 bg-green-50 text-green-700 text-xs font-bold rounded-xl flex items-center gap-2">
+                    <CheckCircle size={16} /> Your comment has been posted!
+                  </div>
+                )}
+                <form onSubmit={handleComment} className="space-y-3">
+                  <input
+                    type="text"
+                    placeholder="Your Full Name *"
+                    required
+                    value={newComment.name}
+                    onChange={(e) => setNewComment(prev => ({...prev, name: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-blue-500 focus:outline-none text-sm"
+                  />
+                  <textarea
+                    rows={3}
+                    placeholder="Write your question for the doctor or tech contributor... *"
+                    required
+                    value={newComment.text}
+                    onChange={(e) => setNewComment(prev => ({...prev, text: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-blue-500 focus:outline-none text-sm resize-none"
+                  />
+                  <button type="submit" className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow">
+                    Submit Comment →
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- NEWS FEED PAGE ---
+    const NewsPage = ({ articles, ads, onUpdateArticle, onOpenModal }) => {
+      const [selectedArticle, setSelectedArticle] = React.useState(null);
+      const [activeCategory, setActiveCategory] = React.useState('All');
+      const [searchQuery, setSearchQuery] = React.useState('');
+      const { Search } = Icons;
+      const categories = ['All', 'Health & Medicine', 'Tech & Innovation', 'Business Growth'];
+
+      // Only display approved articles on the public news feed
+      const publicArticles = articles.filter(a => a.status === 'approved' || !a.status);
+
+      const filtered = publicArticles.filter(article => {
+        const matchesCategory = activeCategory === 'All' || article.category === activeCategory;
+        const matchesSearch = !searchQuery.trim() ||
+          article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          article.authorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          article.authorCredential.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (article.content && article.content.toLowerCase().includes(searchQuery.toLowerCase()));
+        return matchesCategory && matchesSearch;
+      });
+
+      if (selectedArticle) {
+        return (
+          <ArticleReader
+            article={selectedArticle}
+            ads={ads}
+            onBack={() => setSelectedArticle(null)}
+            onUpdateArticle={(updated) => {
+              onUpdateArticle(updated);
+              setSelectedArticle(updated);
+            }}
+            onOpenModal={onOpenModal}
+          />
+        );
+      }
+
+      return (
+        <div className="min-h-screen bg-slate-50">
+          <div className="py-12 px-4 text-white text-center" style={{ background: '#0F172A' }}>
+            <div className="max-w-4xl mx-auto">
+              <span className="text-xs font-bold text-teal-400 tracking-wider uppercase bg-teal-950 px-3 py-1 rounded-full border border-teal-800">
+                Medical & Tech Publications
+              </span>
+              <h1 className="text-3xl sm:text-4xl font-black mt-3 mb-2">Health & Tech News Hub</h1>
+              <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-6">
+                Read clinical analyses, digital health trends, and SME growth strategies written by verified physicians and engineers.
+              </p>
+
+              {/* Instant Search Bar */}
+              <div className="max-w-lg mx-auto relative">
+                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Search articles, topics or doctors (e.g. Hypertension, AI)..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white/10 backdrop-blur-md text-white placeholder-slate-400 border border-white/20 focus:border-teal-400 focus:bg-white/20 focus:outline-none text-sm transition-all shadow-lg"
+                />
+                {searchQuery && (
+                  <button onClick={() => setSearchQuery('')} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-300 hover:text-white bg-white/10 px-2 py-0.5 rounded-full">
+                    Clear
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="sticky top-16 z-30 bg-white border-b border-slate-200 shadow-sm px-4 py-3">
+            <div className="max-w-7xl mx-auto flex gap-2 overflow-x-auto">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+                    activeCategory === cat
+                      ? 'bg-blue-600 text-white shadow'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:border-blue-400'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 py-10">
+            {filtered.length === 0 ? (
+              <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 p-8 max-w-xl mx-auto shadow-sm mb-10">
+                <div className="text-4xl mb-3">📰</div>
+                <h3 className="text-lg font-bold text-slate-900 mb-1">No articles found</h3>
+                <p className="text-xs text-slate-500 mb-4">No published insights match "{searchQuery}" in {activeCategory}.</p>
+                <button
+                  onClick={() => { setSearchQuery(''); setActiveCategory('All'); }}
+                  className="px-4 py-2 bg-blue-50 text-blue-700 rounded-xl text-xs font-bold hover:bg-blue-100"
+                >
+                  Reset Filter & Search
+                </button>
+              </div>
+            ) : null}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.map(article => (
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                  onClick={() => setSelectedArticle(article)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // --- TWO-TIER PASSCODE PROTECTED PORTAL (Admin vs Doctor) ---
+    const AdminPortal = ({ articles, ads, portfolio, portalType, onUpdateArticles, onUpdateAds, onUpdatePortfolio, onExit }) => {
+      // Role can be: null (locked), 'admin' (full access), or 'doctor' (write only)
+      const [role, setRole] = React.useState(null);
+      const [activeTab, setActiveTab] = React.useState('write');
+      const [passcode, setPasscode] = React.useState('');
+      const [error, setError] = React.useState('');
+
+      const [articleForm, setArticleForm] = React.useState({
+        title: '', category: 'Health & Medicine', authorName: '', authorCredential: '',
+        authorRole: 'verified-doctor', authorBio: '', coverImage: '', content: ''
+      });
+      const [articleSuccess, setArticleSuccess] = React.useState(false);
+
+      const [leads, setLeads] = React.useState(() => {
+        try {
+          return JSON.parse(localStorage.getItem('aqmt_leads') || '[]');
+        } catch(e) {
+          return [];
+        }
+      });
+
+      const [adForm, setAdForm] = React.useState({
+        title: '', price: '', priceUSD: '', category: 'Medical Equipment',
+        duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: ''
+      });
+      const [adSuccess, setAdSuccess] = React.useState(false);
+
+      const [projForm, setProjForm] = React.useState({
+        title: '', category: 'Health-Tech & Medical Apps', client: '',
+        duration: '', metrics: '', tags: '', description: '', liveUrl: ''
+      });
+      const [projSuccess, setProjSuccess] = React.useState(false);
+
+      // Portal entry mode: 'admin' (via #admin or Ctrl+Shift+A) vs 'contributor' (via footer link or #contributor)
+      const portalMode = portalType || (window.location.hash === '#contributor' ? 'contributor' : 'admin');
+
+      const handleLogin = (e) => {
+        e.preventDefault();
+        const code = passcode.trim();
+        if (portalMode === 'admin') {
+          if (code === SITE_CONFIG.adminPassword) {
+            setRole('admin');
+            setError('');
+          } else {
+            setError('Access Denied. Invalid Admin Master Password.');
+          }
+        } else {
+          // Contributor Studio
+          if (code === SITE_CONFIG.doctorPassword) {
+            setRole('doctor');
+            setError('');
+          } else {
+            setError('Access Denied. Invalid Writer / Doctor Invite Passcode.');
+          }
+        }
+      };
+
+      const handlePublishArticle = (e) => {
+        e.preventDefault();
+        const wordCount = articleForm.content.trim().split(/\s+/).filter(Boolean).length;
+        // If submitted by Admin: automatically approved. If submitted by Contributor/Doctor: pending review
+        const status = role === 'admin' ? 'approved' : 'pending';
+        const newArt = {
+          id: Date.now(),
+          ...articleForm,
+          status,
+          date: 'Nov 11, 2026',
+          readTime: `${Math.ceil(wordCount / 180)} min`,
+          comments: []
+        };
+        onUpdateArticles([newArt, ...articles]);
+        setArticleForm({ title: '', category: 'Health & Medicine', authorName: '', authorCredential: '', authorRole: 'verified-doctor', authorBio: '', coverImage: '', content: '' });
+        setArticleSuccess(true);
+        setTimeout(() => setArticleSuccess(false), 4000);
+      };
+
+      const handleApproveArticle = (articleId) => {
+        const updated = articles.map(a => a.id === articleId ? { ...a, status: 'approved' } : a);
+        onUpdateArticles(updated);
+      };
+
+      const handleRejectArticle = (articleId) => {
+        const updated = articles.filter(a => a.id !== articleId);
+        onUpdateArticles(updated);
+      };
+
+      const handleAddAd = (e) => {
+        e.preventDefault();
+        // Clean and validate WhatsApp digits
+        const cleanWhatsapp = adForm.sellerWhatsapp.replace(/[^0-9]/g, '');
+        const newAd = {
+          id: Date.now(),
+          ...adForm,
+          sellerWhatsapp: cleanWhatsapp,
+          views: 10,
+          clicks: 0,
+          featured: true
+        };
+        onUpdateAds([newAd, ...ads]);
+        setAdForm({ title: '', price: '', priceUSD: '', category: 'Medical Equipment', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: '' });
+        setAdSuccess(true);
+        setTimeout(() => setAdSuccess(false), 3000);
+      };
+
+      const handleAddProject = (e) => {
+        e.preventDefault();
+        const newProj = {
+          id: Date.now(),
+          title: projForm.title,
+          category: projForm.category,
+          client: projForm.client || 'Confidential Client',
+          duration: projForm.duration || '4 Weeks',
+          metrics: projForm.metrics || '100% Satisfaction',
+          tags: projForm.tags ? projForm.tags.split(',').map(t => t.trim()) : ['React', 'HealthTech'],
+          description: projForm.description,
+          liveUrl: projForm.liveUrl || '#'
+        };
+        try {
+          const currentProj = JSON.parse(localStorage.getItem('aqmt_portfolio') || '[]');
+          const updated = [newProj, ...currentProj];
+          localStorage.setItem('aqmt_portfolio', JSON.stringify(updated));
+        } catch(e) {}
+        setProjForm({ title: '', category: 'Health-Tech & Medical Apps', client: '', duration: '', metrics: '', tags: '', description: '', liveUrl: '' });
+        setProjSuccess(true);
+        setTimeout(() => setProjSuccess(false), 3000);
+      };
+
+      // 1. LOCKED VIEW (Requires Passcode, No Skip Bypass)
+      if (!role) {
+        return (
+          <div className="min-h-[80vh] flex items-center justify-center p-4">
+            <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-2xl max-w-md w-full text-center">
+              <div className="w-16 h-16 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-4 font-black text-2xl">
+                {portalMode === 'admin' ? '🛡️' : '🩺'}
+              </div>
+              <h2 className="text-2xl font-black text-slate-900 mb-1">
+                {portalMode === 'admin' ? 'AQMedTech Admin Portal' : 'Contributor & Writer Studio'}
+              </h2>
+              <p className="text-slate-500 text-xs mb-6">
+                {portalMode === 'admin'
+                  ? 'Private master portal for Executive Agency control. Enter Admin Password.'
+                  : 'Authorized Doctor & Health-Tech writer desk. Enter your Invite Passcode.'}
+              </p>
+
+              <form onSubmit={handleLogin} className="space-y-4">
+                <input
+                  type="password"
+                  required
+                  placeholder={portalMode === 'admin' ? "Enter Admin Password..." : "Enter Writer Invite Code..."}
+                  value={passcode}
+                  onChange={(e) => setPasscode(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:outline-none text-sm text-center font-mono tracking-widest text-lg"
+                />
+                {error && (
+                  <p className="text-xs text-red-600 font-semibold bg-red-50 p-2.5 rounded-lg border border-red-200">
+                    {error}
+                  </p>
+                )}
+                <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow">
+                  {portalMode === 'admin' ? 'Unlock Admin Command →' : 'Unlock Writer Studio →'}
+                </button>
+              </form>
+
+              <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-slate-400">
+                <p>Public visitors can read and comment freely on the News Hub.</p>
+                <button onClick={onExit} className="mt-2 text-blue-600 hover:underline font-semibold">
+                  Return to Home Page
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // 2. UNLOCKED VIEW (Two-Tier Role-Based Controls)
+      return (
+        <div className="max-w-4xl mx-auto px-4 py-10">
+          <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-200">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                {role === 'admin' ? (
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200">
+                    🛡️ Administrator Command
+                  </span>
+                ) : (
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-100 text-teal-800 border border-teal-200">
+                    🩺 Verified Doctor / Writer Studio
+                  </span>
+                )}
+              </div>
+              <h2 className="text-3xl font-black text-slate-900">
+                {role === 'admin' ? 'AQMedTech Admin Center' : 'Author Publishing Desk'}
+              </h2>
+              <p className="text-slate-500 text-xs">
+                {role === 'admin' 
+                  ? 'Full administrative control over articles, ads, portfolio & leads.' 
+                  : 'Authorized medical and technical publication desk.'}
+              </p>
+            </div>
+            <button
+              onClick={() => { setRole(null); onExit(); }}
+              className="px-3.5 py-2 text-xs font-bold text-red-600 border border-red-200 rounded-xl hover:bg-red-50 transition-colors"
+            >
+              Lock & Logout
+            </button>
+          </div>
+
+          {/* Navigation Tabs (Admin sees all 5, Doctors see only article writing) */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            <button
+              onClick={() => setActiveTab('write')}
+              className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                activeTab === 'write' ? 'bg-blue-600 text-white shadow' : 'bg-white border text-slate-600'
+              }`}
+            >
+              ✍️ Submit Article
+            </button>
+            {role === 'admin' && (
+              <>
+                <button
+                  onClick={() => setActiveTab('moderation')}
+                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all relative ${
+                    activeTab === 'moderation' ? 'bg-blue-600 text-white shadow' : 'bg-white border text-slate-600'
+                  }`}
+                >
+                  ⚖️ Review Articles ({articles.filter(a => a.status === 'pending').length})
+                  {articles.filter(a => a.status === 'pending').length > 0 && (
+                    <span className="ml-1.5 w-2 h-2 rounded-full bg-red-500 inline-block animate-ping" />
+                  )}
+                </button>
+                <button
+                  onClick={() => setActiveTab('ads')}
+                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                    activeTab === 'ads' ? 'bg-blue-600 text-white shadow' : 'bg-white border text-slate-600'
+                  }`}
+                >
+                  📦 Manage Ads
+                </button>
+                <button
+                  onClick={() => setActiveTab('portfolio')}
+                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                    activeTab === 'portfolio' ? 'bg-blue-600 text-white shadow' : 'bg-white border text-slate-600'
+                  }`}
+                >
+                  🚀 Add Portfolio Project
+                </button>
+                <button
+                  onClick={() => {
+                    try {
+                      setLeads(JSON.parse(localStorage.getItem('aqmt_leads') || '[]'));
+                    } catch(e) {}
+                    setActiveTab('leads');
+                  }}
+                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                    activeTab === 'leads' ? 'bg-blue-600 text-white shadow' : 'bg-white border text-slate-600'
+                  }`}
+                >
+                  📬 Inquiries / Leads ({leads.length})
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* TAB 1: WRITE ARTICLE (Available to Doctors & Admin) */}
+          {activeTab === 'write' && (
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+              <h3 className="text-xl font-bold text-slate-900 mb-1">
+                {role === 'admin' ? 'Publish a Medical or Tech Article' : 'Submit an Article for Editorial Review'}
+              </h3>
+              <p className="text-xs text-slate-500 mb-4">
+                {role === 'admin'
+                  ? 'As an Administrator, articles you publish go live immediately.'
+                  : 'Submitted articles are verified by the AQMedTech Editorial Board before appearing on the public feed.'}
+              </p>
+
+              {articleSuccess && (
+                <div className="mb-4 p-3 bg-green-50 text-green-700 text-xs font-bold rounded-xl border border-green-200">
+                  {role === 'admin'
+                    ? '🎉 Article published successfully! It is now live in the News Hub.'
+                    : '🎉 Article submitted successfully! It has been placed in the Admin review queue for approval.'}
+                </div>
+              )}
+              <form onSubmit={handlePublishArticle} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Article Headline *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Preventing Cardiovascular Disease in Urban Professionals"
+                    value={articleForm.title}
+                    onChange={(e) => setArticleForm(p => ({...p, title: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Category *</label>
+                    <select
+                      value={articleForm.category}
+                      onChange={(e) => setArticleForm(p => ({...p, category: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    >
+                      <option>Health & Medicine</option>
+                      <option>Tech & Innovation</option>
+                      <option>Business Growth</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Author Verification Badge *</label>
+                    <select
+                      value={articleForm.authorRole}
+                      onChange={(e) => setArticleForm(p => ({...p, authorRole: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    >
+                      <option value="verified-doctor">Verified Medical Doctor (✅ Doctor)</option>
+                      <option value="tech-contributor">Tech / Business Contributor (✅ Tech)</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Author Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Dr. Tunde Adebayo"
+                      value={articleForm.authorName}
+                      onChange={(e) => setArticleForm(p => ({...p, authorName: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Medical/Professional Credentials *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. MBBS, FWACS - Consultant Surgeon"
+                      value={articleForm.authorCredential}
+                      onChange={(e) => setArticleForm(p => ({...p, authorCredential: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Author Mini-Biography (Displays in article bio card)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Consultant Surgeon with 10+ years experience in laparoscopic procedures..."
+                    value={articleForm.authorBio || ''}
+                    onChange={(e) => setArticleForm(p => ({...p, authorBio: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Cover Image (Upload Photo or Paste URL) *</label>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="text"
+                      required
+                      placeholder="https://images.unsplash.com/... or upload below"
+                      value={articleForm.coverImage}
+                      onChange={(e) => setArticleForm(p => ({...p, coverImage: e.target.value}))}
+                      className="flex-1 px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                    <label className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap">
+                      <span>📁 Browse Image</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (ev) => {
+                              setArticleForm(p => ({...p, coverImage: ev.target.result}));
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </label>
+                  </div>
+                  {articleForm.coverImage && (
+                    <div className="mt-2 h-24 w-40 rounded-xl overflow-hidden border border-slate-200">
+                      <img src={articleForm.coverImage} alt="Cover preview" className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Article Body (Paragraphs separated by blank lines) *</label>
+                  <textarea
+                    rows={8}
+                    required
+                    placeholder="Write the full article content here..."
+                    value={articleForm.content}
+                    onChange={(e) => setArticleForm(p => ({...p, content: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm resize-none"
+                  />
+                </div>
+                <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow">
+                  {role === 'admin' ? 'Publish Article Instantly 🚀' : 'Submit Article for Review 📤'}
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* TAB: ARTICLE MODERATION (Admin Only) */}
+          {activeTab === 'moderation' && role === 'admin' && (
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+              <h3 className="text-xl font-bold text-slate-900 mb-1">Article Review & Editorial Queue</h3>
+              <p className="text-xs text-slate-500 mb-6">Review doctor and contributor submissions before they appear in the public feed.</p>
+
+              {articles.filter(a => a.status === 'pending').length === 0 ? (
+                <div className="text-center py-12 border-2 border-dashed border-slate-200 rounded-2xl">
+                  <div className="text-3xl mb-2">✅</div>
+                  <p className="text-sm font-semibold text-slate-700">All submissions are reviewed!</p>
+                  <p className="text-xs text-slate-400 mt-1">When a writer submits a new article, it will appear here for your one-click approval.</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {articles.filter(a => a.status === 'pending').map((art) => (
+                    <div key={art.id} className="p-5 rounded-2xl border border-amber-200 bg-amber-50/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-200 text-amber-900 uppercase">
+                            Pending Review
+                          </span>
+                          <span className="text-xs text-slate-400 font-semibold">{art.category}</span>
+                        </div>
+                        <h4 className="font-bold text-slate-900 text-base mb-1">{art.title}</h4>
+                        <p className="text-xs text-slate-600 mb-2">
+                          By <strong className="text-slate-800">{art.authorName}</strong> ({art.authorCredential})
+                        </p>
+                        <p className="text-xs text-slate-500 line-clamp-2 max-w-2xl">{art.content}</p>
+                      </div>
+                      <div className="flex items-center gap-2 w-full md:w-auto">
+                        <button
+                          onClick={() => handleApproveArticle(art.id)}
+                          className="flex-1 md:flex-none px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl text-xs font-bold shadow"
+                        >
+                          ✅ Approve & Publish
+                        </button>
+                        <button
+                          onClick={() => handleRejectArticle(art.id)}
+                          className="flex-1 md:flex-none px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-xl text-xs font-bold"
+                        >
+                          Reject / Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB 2: MANAGE ADS (Admin Only) */}
+          {activeTab === 'ads' && role === 'admin' && (
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Post a New Product Advertisement</h3>
+              {adSuccess && (
+                <div className="mb-4 p-3 bg-green-50 text-green-700 text-xs font-bold rounded-xl">
+                  🎉 Advertisement created and visible in marketplace!
+                </div>
+              )}
+              <form onSubmit={handleAddAd} className="space-y-4 mb-8">
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Product Title *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Omron M3 Comfort Blood Pressure Monitor"
+                    value={adForm.title}
+                    onChange={(e) => setAdForm(p => ({...p, title: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Price (₦) *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="₦35,000"
+                      value={adForm.price}
+                      onChange={(e) => setAdForm(p => ({...p, price: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Price (USD)</label>
+                    <input
+                      type="text"
+                      placeholder="$25"
+                      value={adForm.priceUSD}
+                      onChange={(e) => setAdForm(p => ({...p, priceUSD: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Category *</label>
+                    <select
+                      value={adForm.category}
+                      onChange={(e) => setAdForm(p => ({...p, category: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    >
+                      <option>Medical Equipment</option>
+                      <option>Health & Wellness</option>
+                      <option>Tech & Office Gadgets</option>
+                      <option>Software & Digital Services</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Ad Duration / Expiry *</label>
+                    <select
+                      value={adForm.duration || '30 Days (Active)'}
+                      onChange={(e) => setAdForm(p => ({...p, duration: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    >
+                      <option>7 Days Campaign</option>
+                      <option>14 Days Campaign</option>
+                      <option>30 Days (Active)</option>
+                      <option>60 Days VIP Placement</option>
+                      <option>Permanent Partner</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Seller WhatsApp (International format) *</label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="e.g. 2348012345678"
+                      value={adForm.sellerWhatsapp}
+                      onChange={(e) => setAdForm(p => ({...p, sellerWhatsapp: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm font-mono"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Seller / Business Name *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Apex Health Store"
+                    value={adForm.sellerName}
+                    onChange={(e) => setAdForm(p => ({...p, sellerName: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Product Photo (Upload Image or Paste URL) *</label>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="text"
+                      required
+                      placeholder="https://images.unsplash.com/... or upload below"
+                      value={adForm.imageUrl}
+                      onChange={(e) => setAdForm(p => ({...p, imageUrl: e.target.value}))}
+                      className="flex-1 px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                    <label className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap">
+                      <span>📁 Upload Photo</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (ev) => {
+                              setAdForm(p => ({...p, imageUrl: ev.target.result}));
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </label>
+                  </div>
+                  {adForm.imageUrl && (
+                    <div className="mt-2 h-24 w-32 rounded-xl overflow-hidden border border-slate-200">
+                      <img src={adForm.imageUrl} alt="Ad preview" className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Short Description *</label>
+                  <textarea
+                    rows={3}
+                    required
+                    placeholder="Key features and details..."
+                    value={adForm.description}
+                    onChange={(e) => setAdForm(p => ({...p, description: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm resize-none"
+                  />
+                </div>
+                <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow">
+                  Add to Marketplace 📢
+                </button>
+              </form>
+
+              <h4 className="font-bold text-slate-900 text-base mb-3 border-t pt-6">Existing Marketplace Ads</h4>
+              <div className="space-y-3">
+                {ads.map((ad) => (
+                  <div key={ad.id} className="flex items-center justify-between p-3 rounded-xl border bg-slate-50">
+                    <div>
+                      <p className="font-bold text-slate-900 text-sm">{ad.title}</p>
+                      <p className="text-xs text-blue-600 font-semibold">{ad.price} · {ad.sellerName}</p>
+                    </div>
+                    <button
+                      onClick={() => onUpdateAds(ads.filter(a => a.id !== ad.id))}
+                      className="px-3 py-1 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg text-xs font-bold"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: PORTFOLIO MANAGEMENT (Admin Only) */}
+          {activeTab === 'portfolio' && role === 'admin' && (
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">Add a New Portfolio Project</h3>
+              {projSuccess && (
+                <div className="mb-4 p-3 bg-green-50 text-green-700 text-xs font-bold rounded-xl border border-green-200">
+                  🎉 Portfolio project saved successfully and added to Home page!
+                </div>
+              )}
+              <form onSubmit={handleAddProject} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Project Title *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. TeleDoc Nigeria - National Telemedicine Portal"
+                    value={projForm.title}
+                    onChange={(e) => setProjForm(p => ({...p, title: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Category *</label>
+                    <select
+                      value={projForm.category}
+                      onChange={(e) => setProjForm(p => ({...p, category: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    >
+                      <option>Health-Tech & Medical Apps</option>
+                      <option>Web Design & Development</option>
+                      <option>Enterprise Web Systems</option>
+                      <option>Advertising & Growth</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Client Name</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Apex Health Systems"
+                      value={projForm.client}
+                      onChange={(e) => setProjForm(p => ({...p, client: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Duration</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. 6 Weeks"
+                      value={projForm.duration}
+                      onChange={(e) => setProjForm(p => ({...p, duration: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Key Impact / Metric</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. +310% Online Consultations"
+                      value={projForm.metrics}
+                      onChange={(e) => setProjForm(p => ({...p, metrics: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Tech Stack Tags (comma-separated)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Next.js, WebRTC, Tailwind, PostgreSQL"
+                    value={projForm.tags}
+                    onChange={(e) => setProjForm(p => ({...p, tags: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Project Description *</label>
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Describe what we engineered and how it solves the client's problem..."
+                    value={projForm.description}
+                    onChange={(e) => setProjForm(p => ({...p, description: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm resize-none"
+                  />
+                </div>
+                <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow">
+                  Add Project to Agency Portfolio 🚀
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* TAB 4: CLIENT INQUIRIES & LEADS (Admin Only) */}
+          {activeTab === 'leads' && role === 'admin' && (
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900">Submitted Client Inquiries & Leads</h3>
+                  <p className="text-xs text-slate-500">Leads captured from the "Hire Us / Advertise" modal</p>
+                </div>
+                {leads.length > 0 && (
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem('aqmt_leads');
+                      setLeads([]);
+                    }}
+                    className="px-3 py-1.5 text-xs text-red-600 border border-red-200 rounded-lg hover:bg-red-50 font-semibold"
+                  >
+                    Clear All Leads
+                  </button>
+                )}
+              </div>
+
+              {leads.length === 0 ? (
+                <div className="text-center py-12 border-2 border-dashed border-slate-200 rounded-2xl">
+                  <div className="text-3xl mb-2">📬</div>
+                  <p className="text-sm font-semibold text-slate-600">No client inquiries saved yet.</p>
+                  <p className="text-xs text-slate-400 mt-1">When visitors submit the Hire Us modal form, their details will appear here.</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {leads.map((lead, idx) => (
+                    <div key={lead.id || idx} className="p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white transition-colors">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="px-2.5 py-0.5 rounded-md text-xs font-bold uppercase bg-blue-100 text-blue-700">
+                          {lead.service || 'Service Request'}
+                        </span>
+                        <span className="text-xs text-slate-400">
+                          {lead.date ? new Date(lead.date).toLocaleDateString() : 'Recent'}
+                        </span>
+                      </div>
+                      <h4 className="font-bold text-slate-900 text-sm mb-1">{lead.name || 'Anonymous Client'}</h4>
+                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600 mb-2 font-mono">
+                        {lead.email && <span>📧 {lead.email}</span>}
+                        {lead.phone && <span>📞 {lead.phone}</span>}
+                        {lead.budget && <span>💰 Budget: {lead.budget}</span>}
+                      </div>
+                      {lead.details && (
+                        <p className="text-xs text-slate-700 bg-white p-3 rounded-lg border border-slate-200 whitespace-pre-line">
+                          {lead.details}
+                        </p>
+                      )}
+                      {lead.phone && (
+                        <div className="mt-3 flex justify-end">
+                          <a
+                            href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${lead.name}, thank you for reaching out to AQMedTech regarding your ${lead.service} inquiry!`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-xs font-bold shadow"
+                          >
+                            💬 Contact on WhatsApp
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    // --- HIRE / INQUIRY MODAL ---
+    const HireModal = ({ isOpen, onClose, initialType }) => {
+      const [step, setStep] = React.useState(1);
+      const [selectedService, setSelectedService] = React.useState(initialType || 'website');
+      const [form, setForm] = React.useState({ name: '', email: '', phone: '', budget: '', details: '' });
+      const [success, setSuccess] = React.useState(false);
+      const { X, Globe, Activity, Wrench, TrendingUp, CheckCircle, Send, Zap } = Icons;
+
+      React.useEffect(() => {
+        if (initialType) { setSelectedService(initialType); setStep(2); }
+        else { setStep(1); setSelectedService('website'); }
+        setSuccess(false);
+        setForm({ name: '', email: '', phone: '', budget: '', details: '' });
+      }, [isOpen, initialType]);
+
+      if (!isOpen) return null;
+
+      const services = [
+        { id: 'website', label: 'Build a Website', desc: 'Corporate, e-commerce, custom portals', icon: Globe, color: '#2563EB' },
+        { id: 'healthapp', label: 'Develop a Health App', desc: 'Telemedicine, clinic & patient platforms', icon: Activity, color: '#0D9488' },
+        { id: 'maintenance', label: 'Full-Stack Maintenance', desc: 'Server monitoring, bug fixes, upgrades', icon: Wrench, color: '#7C3AED' },
+        { id: 'advertise', label: 'Advertise a Product', desc: 'Promote to daily AQMedTech readers', icon: TrendingUp, color: '#D97706' },
+      ];
+
+      const handleSendWA = () => {
+        const svc = services.find(s => s.id === selectedService);
+        const msg = encodeURIComponent(
+          `Hello AQMedTech! I would like to inquire about: *${svc?.label}*\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nBudget: ${form.budget}\n\nProject Overview:\n${form.details}\n\nPlease get in touch.`
+        );
+        window.open(`https://wa.me/2348012345678?text=${msg}`, '_blank');
+      };
+
+      const handleSubmitDashboard = (e) => {
+        e.preventDefault();
+        const lead = { id: Date.now(), service: selectedService, ...form, date: new Date().toISOString() };
+        try {
+          const existing = JSON.parse(localStorage.getItem('aqmt_leads') || '[]');
+          localStorage.setItem('aqmt_leads', JSON.stringify([...existing, lead]));
+        } catch(err) {}
+        setSuccess(true);
+      };
+
+      return (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4" style={{background:'rgba(0,0,0,0.7)', backdropFilter:'blur(6px)'}}>
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto relative border border-slate-200">
+            <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-xl hover:bg-slate-100 text-slate-500 z-10">
+              <X size={20} />
+            </button>
+
+            <div className="p-8">
+              {success ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-4 font-bold">
+                    <CheckCircle size={36} />
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-900 mb-2">Inquiry Submitted! 🎉</h3>
+                  <p className="text-slate-500 text-sm mb-6">Our lead architects will review your project and get in touch within 24 hours.</p>
+                  <button onClick={onClose} className="px-8 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm">
+                    Close Window
+                  </button>
+                </div>
+              ) : step === 1 ? (
+                <>
+                  <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-1 text-blue-600 font-bold text-xs uppercase tracking-wider">
+                      <Zap size={14} /> Start a Project or Place an Ad
+                    </div>
+                    <h2 className="text-2xl font-black text-slate-900">How can we help you?</h2>
+                    <p className="text-slate-500 text-xs mt-1">Select the service you are interested in.</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 mb-4">
+                    {services.map(svc => {
+                      const IconComponent = svc.icon;
+                      return (
+                        <button
+                          key={svc.id}
+                          onClick={() => { setSelectedService(svc.id); setStep(2); }}
+                          className={`p-4 rounded-2xl border-2 text-left transition-all hover:shadow-md ${
+                            selectedService === svc.id ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-blue-300'
+                          }`}
+                        >
+                          <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-2" style={{background: svc.color + '20', color: svc.color}}>
+                            <IconComponent size={20} />
+                          </div>
+                          <p className="font-bold text-slate-900 text-xs sm:text-sm">{svc.label}</p>
+                          <p className="text-[10px] text-slate-400 mt-1 line-clamp-1">{svc.desc}</p>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <button onClick={() => setStep(1)} className="text-slate-400 hover:text-slate-700 text-xs mb-4 flex items-center gap-1 font-semibold">
+                    ← Change Service
+                  </button>
+                  <h3 className="text-xl font-black text-slate-900 mb-1">Tell us about your project</h3>
+                  <p className="text-xs text-slate-400 mb-5">
+                    Selected: <span className="font-bold text-blue-600">{services.find(s => s.id === selectedService)?.label}</span>
+                  </p>
+                  <form onSubmit={handleSubmitDashboard} className="space-y-3">
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Your Full Name *"
+                        required
+                        value={form.name}
+                        onChange={(e) => setForm(p => ({...p, name: e.target.value}))}
+                        className="w-full px-4 py-2.5 rounded-xl border text-sm focus:border-blue-500 focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="tel"
+                        placeholder="WhatsApp / Phone Number (e.g. +2348012345678) *"
+                        required
+                        value={form.phone}
+                        onChange={(e) => setForm(p => ({...p, phone: e.target.value}))}
+                        className="w-full px-4 py-2.5 rounded-xl border text-sm focus:border-blue-500 focus:outline-none font-mono"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <select
+                        value={form.budget}
+                        onChange={(e) => setForm(p => ({...p, budget: e.target.value}))}
+                        className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                      >
+                        <option value="">Budget: Flexible / Let's Discuss</option>
+                        <option>Under ₦100,000</option>
+                        <option>₦100,000 – ₦500,000</option>
+                        <option>₦500,000 – ₦2,000,000</option>
+                        <option>₦2,000,000+</option>
+                      </select>
+                      <input
+                        type="email"
+                        placeholder="Email (Optional)"
+                        value={form.email}
+                        onChange={(e) => setForm(p => ({...p, email: e.target.value}))}
+                        className="w-full px-4 py-2.5 rounded-xl border text-sm focus:border-blue-500 focus:outline-none"
+                      />
+                    </div>
+                    <textarea
+                      rows={2}
+                      placeholder="Brief details or specifications (Optional)..."
+                      value={form.details}
+                      onChange={(e) => setForm(p => ({...p, details: e.target.value}))}
+                      className="w-full px-4 py-2 rounded-xl border text-sm resize-none focus:border-blue-500 focus:outline-none"
+                    />
+                    <div className="flex flex-col sm:flex-row gap-2 pt-1">
+                      <button
+                        type="button"
+                        onClick={handleSendWA}
+                        className="flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm text-white flex items-center justify-center gap-1.5 shadow"
+                        style={{background:'#25D366'}}
+                      >
+                        <Send size={14} /> Instant Quote on WhatsApp
+                      </button>
+                      <button
+                        type="submit"
+                        className="flex-1 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow"
+                      >
+                        Save & Request Callback
+                      </button>
+                    </div>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // =========================================================================
+    // 4. MAIN APP INTEGRATOR (ROUTING, SHORTCUTS, FOOTER)
+    // =========================================================================
+    const App = () => {
+      React.useEffect(() => {
+        initializeData();
+      }, []);
+
+      const [currentPage, setCurrentPage] = React.useState('home');
+      const [portalType, setPortalType] = React.useState('admin');
+      const [modalOpen, setModalOpen] = React.useState(false);
+      const [modalType, setModalType] = React.useState('website');
+
+      const [ads, setAds] = React.useState(() => loadData('aqmt_ads', SEED_ADS));
+      const [articles, setArticles] = React.useState(() => loadData('aqmt_articles', SEED_ARTICLES));
+      const [portfolio, setPortfolio] = React.useState(() => loadData('aqmt_portfolio', PORTFOLIO_PROJECTS));
+
+      const updateAds = (newAds) => { setAds(newAds); saveData('aqmt_ads', newAds); };
+      const updateArticles = (newArts) => { setArticles(newArts); saveData('aqmt_articles', newArts); };
+      const updatePortfolio = (newPort) => { setPortfolio(newPort); saveData('aqmt_portfolio', newPort); };
+
+      const handleUpdateSingleArticle = (updated) => {
+        const list = articles.map(a => a.id === updated.id ? updated : a);
+        updateArticles(list);
+      };
+
+      const navigate = (page, mode = 'admin') => {
+        setCurrentPage(page);
+        if (page === 'admin') {
+          setPortalType(mode);
+          window.location.hash = mode === 'contributor' ? '#contributor' : '#admin';
+        } else if (window.location.hash === '#admin' || window.location.hash === '#contributor') {
+          window.location.hash = '';
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      const openModal = (type = 'website') => {
+        setModalType(type);
+        setModalOpen(true);
+      };
+
+      // --- HIDDEN ROUTE & KEYBOARD SHORTCUT DETECTOR ---
+      React.useEffect(() => {
+        const checkHash = () => {
+          if (window.location.hash === '#admin') {
+            setPortalType('admin');
+            setCurrentPage('admin');
+          } else if (window.location.hash === '#contributor') {
+            setPortalType('contributor');
+            setCurrentPage('admin');
+          }
+        };
+        checkHash();
+        window.addEventListener('hashchange', checkHash);
+
+        // Secret Admin shortcut: Ctrl + Shift + A (or Cmd + Shift + A)
+        const handleKeyDown = (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+            e.preventDefault();
+            navigate('admin', 'admin');
+          }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+          window.removeEventListener('hashchange', checkHash);
+          window.removeEventListener('keydown', handleKeyDown);
+        };
+      }, []);
+
+      const { ArrowRight } = Icons;
+
+      return (
+        <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-blue-600 selection:text-white">
+          {/* Public Sticky Navbar (Clean: Only Home, Marketplace, News + Hire Us) */}
+          <Navbar currentPage={currentPage} onNavigate={navigate} onOpenModal={openModal} />
+
+          <main className="flex-1 pt-16">
+            {currentPage === 'home' && (
+              <div>
+                <Hero onOpenModal={openModal} onNavigate={navigate} />
+                <Services onOpenModal={openModal} />
+
+                {/* Strip 1: Top Ads */}
+                <section className="py-16 bg-slate-100 border-y border-slate-200">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                      <div>
+                        <span className="text-xs font-bold text-amber-600 tracking-wider uppercase bg-amber-100 px-3 py-1 rounded-full">
+                          Marketplace Deals
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mt-2">
+                          Featured Products & Equipment
+                        </h2>
+                      </div>
+                      <button
+                        onClick={() => navigate('marketplace')}
+                        className="mt-3 md:mt-0 text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                      >
+                        View Full Marketplace <ArrowRight size={14} />
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {ads.slice(0, 3).map(ad => (
+                        <AdCard
+                          key={ad.id}
+                          ad={ad}
+                          onWhatsAppClick={(id) => {
+                            const updated = ads.map(a => a.id === id ? {...a, clicks: (a.clicks || 0) + 1} : a);
+                            updateAds(updated);
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                <Portfolio projects={portfolio} onOpenModal={openModal} />
+
+                {/* Strip 2: Latest Articles */}
+                <section className="py-16 bg-white border-t border-slate-200">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                      <div>
+                        <span className="text-xs font-bold text-teal-700 tracking-wider uppercase bg-teal-100 px-3 py-1 rounded-full">
+                          Medical & Tech Insights
+                        </span>
+                        <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mt-2">
+                          Latest Doctor & Technical Articles
+                        </h2>
+                      </div>
+                      <button
+                        onClick={() => navigate('news')}
+                        className="mt-3 md:mt-0 text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                      >
+                        Read All Articles <ArrowRight size={14} />
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      {articles.slice(0, 3).map(art => (
+                        <ArticleCard key={art.id} article={art} onClick={() => navigate('news')} />
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                {/* Why Choose Us */}
+                <section className="py-20 text-white" style={{ background: '#0F172A' }}>
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                    <div className="text-center max-w-2xl mx-auto mb-14">
+                      <span className="text-xs font-bold text-teal-400 uppercase tracking-widest bg-teal-950 px-3 py-1 rounded-full border border-teal-800">
+                        Why AQMedTech
+                      </span>
+                      <h2 className="text-3xl sm:text-4xl font-black mt-3">
+                        Engineered for Precision, Speed & Sales
+                      </h2>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {[
+                        { icon: '🏥', title: 'Medical Compliance', desc: 'Secure patient workflows and HIPAA/clinical standards.' },
+                        { icon: '⚡', title: 'High-Speed Web', desc: 'Sub-1.2 second load times on fast React architecture.' },
+                        { icon: '💬', title: 'WhatsApp Funnels', desc: 'Instant conversion triggers to turn traffic into paying clients.' },
+                        { icon: '🛡️', title: '24/7 Monitoring', desc: 'Proactive server maintenance, uptime assurance and patches.' }
+                      ].map((item, idx) => (
+                        <div key={idx} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-400 transition-all">
+                          <div className="text-3xl mb-3">{item.icon}</div>
+                          <h4 className="font-bold text-base mb-1">{item.title}</h4>
+                          <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                {/* Call to Action */}
+                <section className="py-16 bg-gradient-to-r from-blue-700 via-blue-800 to-slate-900 text-white">
+                  <div className="max-w-4xl mx-auto px-4 text-center">
+                    <h2 className="text-3xl sm:text-4xl font-black mb-3">
+                      Ready to Build Your Website or Scale Your Business?
+                    </h2>
+                    <p className="text-blue-100 text-sm sm:text-base mb-8 max-w-xl mx-auto">
+                      Get a free technical consultation and fixed-price quotation from our lead engineers within 24 hours.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                      <button
+                        onClick={() => openModal('website')}
+                        className="px-8 py-4 rounded-xl font-bold text-slate-900 bg-white hover:bg-slate-100 transition-all shadow-xl"
+                      >
+                        🚀 Request a Website / App
+                      </button>
+                      <button
+                        onClick={() => openModal('advertise')}
+                        className="px-8 py-4 rounded-xl font-bold text-white border-2 border-white/40 hover:bg-white/10 transition-all"
+                      >
+                        📢 Advertise Your Product
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {currentPage === 'marketplace' && (
+              <MarketplacePage ads={ads} onUpdateAds={updateAds} onOpenModal={openModal} />
+            )}
+
+            {currentPage === 'news' && (
+              <NewsPage articles={articles} ads={ads} onUpdateArticle={handleUpdateSingleArticle} onOpenModal={openModal} />
+            )}
+
+            {currentPage === 'admin' && (
+              <AdminPortal
+                articles={articles}
+                ads={ads}
+                portfolio={portfolio}
+                portalType={portalType}
+                onUpdateArticles={updateArticles}
+                onUpdateAds={updateAds}
+                onUpdatePortfolio={updatePortfolio}
+                onExit={() => navigate('home')}
+              />
+            )}
+          </main>
+
+          {/* Executive Footer */}
+          <footer className="bg-slate-950 text-slate-400 border-t border-slate-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div className="md:col-span-2">
+                  <div className="flex items-center gap-2 cursor-pointer mb-3" onClick={() => navigate('home')}>
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-black text-xs" style={{background:'linear-gradient(135deg,#2563EB,#0D9488)'}}>
+                      AQ
+                    </div>
+                    <span className="text-white font-black text-lg">AQMedTech Innovations</span>
+                  </div>
+                  <p className="text-slate-400 text-xs sm:text-sm max-w-md leading-relaxed mb-4">
+                    High-performance websites, custom medical & health software, and high-converting product advertising. Designed for African and global healthcare pioneers.
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    WhatsApp: <a href="https://wa.me/2348012345678" target="_blank" className="text-teal-400 font-semibold">+234 801 234 5678</a> · Email: <span className="text-slate-400">abdullahiabdulqaharak@gmail.com</span>
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-3">Public Directory</h4>
+                  <ul className="space-y-2 text-xs">
+                    <li><button onClick={() => navigate('home')} className="hover:text-white">Home & Services</button></li>
+                    <li><button onClick={() => navigate('marketplace')} className="hover:text-white">Marketplace Ads</button></li>
+                    <li><button onClick={() => navigate('news')} className="hover:text-white">Health & Tech News</button></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-3">Agency Info</h4>
+                  <p className="text-xs text-slate-400 leading-relaxed mb-2">📍 Lagos, Nigeria & Worldwide Remote</p>
+                  <button onClick={() => openModal('website')} className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold">
+                    Hire Us Now
+                  </button>
+                  <div className="mt-4 pt-3 border-t border-slate-900">
+                    <button 
+                      onClick={() => navigate('admin', 'contributor')} 
+                      className="text-[11px] text-slate-500 hover:text-slate-300 flex items-center gap-1 transition-colors"
+                    >
+                      🩺 Contributor / Doctor Studio
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="border-t border-slate-900 mt-8 pt-6 flex flex-col sm:flex-row justify-between text-xs text-slate-600">
+                <p>© 2026 AQMedTech Innovations. All rights reserved.</p>
+                <p className="text-[10px] text-slate-600">Admin URL: <code>#admin</code> (Key: <code>Ctrl+Shift+A</code>) · Contributors: <code>#contributor</code></p>
+              </div>
+            </div>
+          </footer>
+
+          <HireModal isOpen={modalOpen} onClose={() => setModalOpen(false)} initialType={modalType} />
+
+          {/* Floating WhatsApp Quick-Help Widget */}
+          <div className="fixed bottom-6 right-6 z-40 group">
+            <a
+              href="https://wa.me/2348012345678?text=Hello%20AQMedTech!%20I%20visited%20your%20platform%20and%20would%20like%20to%20discuss%20a%20project%20or%20ad%20placement."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 px-4 py-3 rounded-full text-white font-bold text-xs sm:text-sm shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-green-500/30"
+              style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}
+            >
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+              </span>
+              <Icons.MessageCircle size={18} />
+              <span className="hidden sm:inline">Chat With Us</span>
+            </a>
+          </div>
+        </div>
+      );
+    };
+
+    // Mount Root
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
 </body>
 </html>

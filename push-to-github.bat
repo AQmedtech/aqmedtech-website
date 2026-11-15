@@ -1,13 +1,22 @@
 @echo off
 setlocal enabledelayedexpansion
-cd /d "C:\Users\HomePC\.gemini\antigravity\scratch\aqmedtech"
+cd /d "%~dp0"
 
 echo ========================================================
 echo        AQMedTech Innovations - Push to GitHub
 echo ========================================================
 echo.
 
-REM Initialize git if needed
+REM 1. Ensure index.html contains the complete standalone application
+echo [*] Syncing full application to index.html for GitHub Pages...
+copy /Y "standalone.html" "index.html" >nul
+if %ERRORLEVEL% EQU 0 (
+    echo [OK] index.html updated successfully with complete application!
+) else (
+    echo [!] Warning: Could not copy standalone.html.
+)
+
+REM 2. Git Setup & Configuration
 if not exist ".git" (
     echo [*] Initializing Git repository...
     git init -b main
@@ -18,40 +27,28 @@ if not exist ".git" (
 git config user.name "AQmedtech"
 git config user.email "abdullahiabdulqaharak@gmail.com"
 
-echo [*] Staging all project files...
+echo [*] Staging all files...
 git add .
 
 echo [*] Committing changes...
-git commit -m "feat: complete AQMedTech platform with portfolio, marketplace, news hub and admin studio"
+git commit -m "fix: make index.html self-contained for GitHub Pages direct launch"
 
 echo.
-set REPO_NAME=aqmedtech
-set /p USER_REPO="Enter repository name on GitHub [default: aqmedtech]: "
-if not "!USER_REPO!"=="" set REPO_NAME=!USER_REPO!
-
-REM Check if remote origin exists
-git remote remove origin 2>nul
-git remote add origin https://github.com/AQmedtech/!REPO_NAME!.git
-
-echo.
-echo [*] Pushing to https://github.com/AQmedtech/!REPO_NAME!.git ...
-echo (If the repository does not exist yet on GitHub, please create it at https://github.com/new first)
-echo.
-
-git push -u origin main
+echo [*] Pushing to GitHub...
+git push origin main
 
 if %ERRORLEVEL% EQU 0 (
     echo.
     echo ========================================================
-    echo  [SUCCESS] Successfully pushed to GitHub!
-    echo  View it at: https://github.com/AQmedtech/!REPO_NAME!
+    echo  [SUCCESS] Pushed to GitHub successfully!
+    echo  Your site will be live at:
+    echo  https://aqmedtech.github.io/aqmedtech/
+    echo  (Allow 60-90 seconds for GitHub Pages to refresh)
     echo ========================================================
 ) else (
     echo.
-    echo [!] Push failed. 
-    echo Please ensure:
-    echo 1. You created a repository named '!REPO_NAME!' on https://github.com/new
-    echo 2. Your GitHub account has permission to push.
+    echo [!] Push encountered an issue. Trying with credentials helper...
+    git push -u origin main
 )
 
 echo.
