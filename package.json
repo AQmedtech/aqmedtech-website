@@ -1,0 +1,21 @@
+{
+  "name": "aqmedtech",
+  "version": "1.0.0",
+  "description": "AQMedTech Innovations — Full-Stack Web Application (MVP 1.0)",
+  "main": "main.js",
+  "scripts": {
+    "start": "npx -y serve . -l 3000",
+    "dev": "npx -y serve . -l 3000",
+    "serve:py": "python -m http.server 3000"
+  },
+  "keywords": [
+    "healthtech",
+    "react",
+    "nextjs",
+    "tailwind",
+    "marketplace",
+    "agency"
+  ],
+  "author": "AQMedTech Innovations",
+  "license": "MIT"
+}
