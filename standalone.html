@@ -146,7 +146,8 @@
     // 2. DATA LAYER & SEED DATA
     // =========================================================================
     const SITE_CONFIG = {
-      whatsappNumber: "2348012345678",
+      whatsappNumber: "2348106440538",     // Primary WhatsApp number (08106440538)
+      displayPhone: "08106440538",
       adminPassword: "aqmedtech2024",      // Full Admin access
       doctorPassword: "doctor2026",        // Doctor / Writer Invite Code
       siteName: "AQMedTech Innovations",
@@ -207,8 +208,8 @@
         priceUSD: "$28",
         category: "Medical Equipment",
         description: "Accurate upper-arm digital BP monitor with memory storage for 60 readings, irregular heartbeat detection, and large LCD display. Ideal for home and clinical use.",
-        sellerName: "HealthFirst Nigeria",
-        sellerWhatsapp: "2348012345678",
+        sellerName: "AQMedTech Store",
+        sellerWhatsapp: "2348106440538",
         imageUrl: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600",
         duration: "30 Days (Active)",
         views: 234,
@@ -222,8 +223,8 @@
         priceUSD: "$60",
         category: "Medical Equipment",
         description: "High acoustic sensitivity for performing general physical assessments. Features dual-tunable diaphragms and next-generation tubing. Ideal for medical students and consultants.",
-        sellerName: "MedEquip Direct Lagos",
-        sellerWhatsapp: "2348098765432",
+        sellerName: "MedEquip Direct",
+        sellerWhatsapp: "2348106440538",
         imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600",
         duration: "30 Days (Active)",
         views: 412,
@@ -238,7 +239,7 @@
         category: "Software & Digital Services",
         description: "Cloud-based Clinic & Hospital EMR system. Includes patient billing, pharmacy inventory, lab results routing, and HMO claims management with 24/7 technical support.",
         sellerName: "AQMedTech Systems",
-        sellerWhatsapp: "2348012345678",
+        sellerWhatsapp: "2348106440538",
         imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600",
         duration: "Active Partner",
         views: 310,
@@ -365,12 +366,12 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
     }
 
     function initializeData() {
-      // Version 2 initialization ensures new schema items (Medical Equipment, Author Bios, Review Status) take immediate effect
-      if (localStorage.getItem('aqmt_schema_version') !== '2.0') {
+      // Version 2.1 ensures the correct phone number (08106440538) refreshes instantly in local seed data
+      if (localStorage.getItem('aqmt_schema_version') !== '2.1') {
         saveData('aqmt_ads', SEED_ADS);
         saveData('aqmt_articles', SEED_ARTICLES);
         saveData('aqmt_portfolio', PORTFOLIO_PROJECTS);
-        localStorage.setItem('aqmt_schema_version', '2.0');
+        localStorage.setItem('aqmt_schema_version', '2.1');
         localStorage.setItem('aqmt_initialized', 'true');
       }
     }
@@ -423,8 +424,18 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                 ))}
               </div>
 
-              {/* Primary Call to Action */}
-              <div className="flex items-center gap-3">
+              {/* Primary Call to Action & Direct WhatsApp Chat */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <a
+                  href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hello%20AQMedTech!%20I%20would%20like%20to%20discuss%20a%20project%20or%20inquire%20about%20your%20services.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90 shadow"
+                  style={{background:'#25D366'}}
+                >
+                  <Icons.MessageCircle size={15} />
+                  WhatsApp Us
+                </a>
                 <button
                   onClick={() => onOpenModal('website')}
                   className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 shadow-lg"
@@ -459,6 +470,15 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                   {link.label}
                 </button>
               ))}
+              <a
+                href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hello%20AQMedTech!%20I%20would%20like%20to%20discuss%20a%20project%20or%20inquire%20about%20your%20services.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full mt-2 px-4 py-3 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2 shadow"
+                style={{background:'#25D366'}}
+              >
+                <Icons.MessageCircle size={16} /> Chat Directly on WhatsApp
+              </a>
               <button
                 onClick={() => { onOpenModal('website'); setMobileOpen(false); }}
                 className="w-full mt-2 px-4 py-3 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-2"
@@ -2080,9 +2100,9 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
       const handleSendWA = () => {
         const svc = services.find(s => s.id === selectedService);
         const msg = encodeURIComponent(
-          `Hello AQMedTech! I would like to inquire about: *${svc?.label}*\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nBudget: ${form.budget}\n\nProject Overview:\n${form.details}\n\nPlease get in touch.`
+          `Hello AQMedTech! I would like to inquire about: *${svc?.label}*\n\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email || 'N/A'}\nBudget: ${form.budget || 'To discuss'}\n\nProject Overview:\n${form.details || 'Let us discuss on WhatsApp'}\n\nPlease get in touch.`
         );
-        window.open(`https://wa.me/2348012345678?text=${msg}`, '_blank');
+        window.open(`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${msg}`, '_blank');
       };
 
       const handleSubmitDashboard = (e) => {
@@ -2466,7 +2486,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                     High-performance websites, custom medical & health software, and high-converting product advertising. Designed for African and global healthcare pioneers.
                   </p>
                   <p className="text-xs text-slate-500">
-                    WhatsApp: <a href="https://wa.me/2348012345678" target="_blank" className="text-teal-400 font-semibold">+234 801 234 5678</a> · Email: <span className="text-slate-400">abdullahiabdulqaharak@gmail.com</span>
+                    WhatsApp: <a href={`https://wa.me/${SITE_CONFIG.whatsappNumber}`} target="_blank" className="text-teal-400 font-semibold">+234 810 644 0538</a> · Email: <span className="text-slate-400">abdullahiabdulqaharak@gmail.com</span>
                   </p>
                 </div>
                 <div>
@@ -2505,7 +2525,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
           {/* Floating WhatsApp Quick-Help Widget */}
           <div className="fixed bottom-6 right-6 z-40 group">
             <a
-              href="https://wa.me/2348012345678?text=Hello%20AQMedTech!%20I%20visited%20your%20platform%20and%20would%20like%20to%20discuss%20a%20project%20or%20ad%20placement."
+              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hello%20AQMedTech!%20I%20visited%20your%20platform%20and%20would%20like%20to%20discuss%20a%20project%20or%20ad%20placement.`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 px-4 py-3 rounded-full text-white font-bold text-xs sm:text-sm shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-green-500/30"

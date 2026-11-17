@@ -8,7 +8,7 @@ echo ========================================================
 echo.
 
 REM 1. Ensure index.html contains the complete standalone application
-echo [*] Syncing full application to index.html for GitHub Pages...
+echo [*] Syncing standalone.html to index.html...
 copy /Y "standalone.html" "index.html" >nul
 if %ERRORLEVEL% EQU 0 (
     echo [OK] index.html updated successfully with complete application!
@@ -31,7 +31,7 @@ echo [*] Staging all files...
 git add .
 
 echo [*] Committing changes...
-git commit -m "fix: make index.html self-contained for GitHub Pages direct launch"
+git commit -m "feat: set primary WhatsApp contact to 08106440538 with 1-click direct chat"
 
 echo.
 echo [*] Pushing to GitHub...
@@ -41,13 +41,10 @@ if %ERRORLEVEL% EQU 0 (
     echo.
     echo ========================================================
     echo  [SUCCESS] Pushed to GitHub successfully!
-    echo  Your site will be live at:
-    echo  https://aqmedtech.github.io/aqmedtech/
-    echo  (Allow 60-90 seconds for GitHub Pages to refresh)
     echo ========================================================
 ) else (
     echo.
-    echo [!] Push encountered an issue. Trying with credentials helper...
+    echo [!] Pushing with credentials helper...
     git push -u origin main
 )
 
