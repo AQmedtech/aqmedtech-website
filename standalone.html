@@ -348,6 +348,35 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
       },
     ];
 
+    // Utility: Client-Side Fast Image Compressor (Reduces raw 5MB photos to ~70KB WebP)
+    function compressImageFile(file, maxWidth = 1200, quality = 0.75) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+          const img = new Image();
+          img.src = event.target.result;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+            if (width > maxWidth) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            // Export as modern WebP
+            resolve(canvas.toDataURL('image/webp', quality));
+          };
+          img.onerror = reject;
+        };
+        reader.onerror = reject;
+      });
+    }
+
     function loadData(key, fallback) {
       try {
         const stored = localStorage.getItem(key);
@@ -366,12 +395,12 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
     }
 
     function initializeData() {
-      // Version 2.1 ensures the correct phone number (08106440538) refreshes instantly in local seed data
-      if (localStorage.getItem('aqmt_schema_version') !== '2.1') {
+      // Version 2.3 updates schema for database-readiness (Location fields, auto-compressor support, fast WhatsApp lead actions)
+      if (localStorage.getItem('aqmt_schema_version') !== '2.3') {
         saveData('aqmt_ads', SEED_ADS);
         saveData('aqmt_articles', SEED_ARTICLES);
         saveData('aqmt_portfolio', PORTFOLIO_PROJECTS);
-        localStorage.setItem('aqmt_schema_version', '2.1');
+        localStorage.setItem('aqmt_schema_version', '2.3');
         localStorage.setItem('aqmt_initialized', 'true');
       }
     }
@@ -723,8 +752,15 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                 {ad.priceUSD && <span className="text-slate-400 text-xs font-semibold">({ad.priceUSD})</span>}
               </div>
               <h3 className="font-bold text-slate-900 text-base leading-tight mb-2 line-clamp-1">{ad.title}</h3>
-              <p className="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-2">{ad.description}</p>
-              <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
+              <p className="text-slate-500 text-xs leading-relaxed mb-3 line-clamp-2">{ad.description}</p>
+              
+              {/* Location Badge */}
+              <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-2">
+                <span>📍</span>
+                <span className="font-medium text-slate-600">{ad.location || 'Nationwide Delivery'}</span>
+              </div>
+
+              <div className="flex items-center justify-between text-xs text-slate-400 mb-2 pt-2 border-t border-slate-100">
                 <span>Sold by: <strong className="font-semibold text-slate-700">{ad.sellerName}</strong></span>
                 {ad.duration && (
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
@@ -1301,7 +1337,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
 
       const [adForm, setAdForm] = React.useState({
         title: '', price: '', priceUSD: '', category: 'Medical Equipment',
-        duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: ''
+        location: '', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: ''
       });
       const [adSuccess, setAdSuccess] = React.useState(false);
 
@@ -1377,7 +1413,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
           featured: true
         };
         onUpdateAds([newAd, ...ads]);
-        setAdForm({ title: '', price: '', priceUSD: '', category: 'Medical Equipment', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: '' });
+        setAdForm({ title: '', price: '', priceUSD: '', category: 'Medical Equipment', location: '', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: '' });
         setAdSuccess(true);
         setTimeout(() => setAdSuccess(false), 3000);
       };
@@ -1645,19 +1681,20 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                       className="flex-1 px-4 py-2.5 rounded-xl border text-sm"
                     />
                     <label className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap">
-                      <span>📁 Browse Image</span>
+                      <span>📁 Browse & Auto-Compress</span>
                       <input
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        onChange={(e) => {
+                        onChange={async (e) => {
                           const file = e.target.files[0];
                           if (file) {
-                            const reader = new FileReader();
-                            reader.onload = (ev) => {
-                              setArticleForm(p => ({...p, coverImage: ev.target.result}));
-                            };
-                            reader.readAsDataURL(file);
+                            try {
+                              const compressed = await compressImageFile(file, 1200, 0.75);
+                              setArticleForm(p => ({...p, coverImage: compressed}));
+                            } catch(err) {
+                              console.error('Compression failed', err);
+                            }
                           }
                         }}
                       />
@@ -1822,16 +1859,29 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                     />
                   </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-600 mb-1">Seller / Business Name *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Apex Health Store"
-                    value={adForm.sellerName}
-                    onChange={(e) => setAdForm(p => ({...p, sellerName: e.target.value}))}
-                    className="w-full px-4 py-2.5 rounded-xl border text-sm"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Seller / Business Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Apex Health Store"
+                      value={adForm.sellerName}
+                      onChange={(e) => setAdForm(p => ({...p, sellerName: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">City / Location (e.g. Lagos, Abuja) *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Ikeja, Lagos"
+                      value={adForm.location || ''}
+                      onChange={(e) => setAdForm(p => ({...p, location: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Product Photo (Upload Image or Paste URL) *</label>
@@ -1845,19 +1895,20 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                       className="flex-1 px-4 py-2.5 rounded-xl border text-sm"
                     />
                     <label className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap">
-                      <span>📁 Upload Photo</span>
+                      <span>📁 Upload & Compress</span>
                       <input
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        onChange={(e) => {
+                        onChange={async (e) => {
                           const file = e.target.files[0];
                           if (file) {
-                            const reader = new FileReader();
-                            reader.onload = (ev) => {
-                              setAdForm(p => ({...p, imageUrl: ev.target.result}));
-                            };
-                            reader.readAsDataURL(file);
+                            try {
+                              const compressed = await compressImageFile(file, 800, 0.75);
+                              setAdForm(p => ({...p, imageUrl: compressed}));
+                            } catch(err) {
+                              console.error('Compression failed', err);
+                            }
                           }
                         }}
                       />

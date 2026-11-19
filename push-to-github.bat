@@ -26,21 +26,24 @@ if not exist ".git" (
 
 git config user.name "AQmedtech"
 git config user.email "abdullahiabdulqaharak@gmail.com"
+git remote set-url origin https://github.com/AQmedtech/aqmedtech-website.git 2>nul || git remote add origin https://github.com/AQmedtech/aqmedtech-website.git
 
 echo [*] Staging all files...
 git add .
 
 echo [*] Committing changes...
-git commit -m "feat: set primary WhatsApp contact to 08106440538 with 1-click direct chat"
+git commit -m "feat: database-ready schema with client-side image compression, seller locations, and WhatsApp lead routing"
 
 echo.
-echo [*] Pushing to GitHub...
+echo [*] Pushing to GitHub (aqmedtech-website)...
 git push origin main
 
 if %ERRORLEVEL% EQU 0 (
     echo.
     echo ========================================================
     echo  [SUCCESS] Pushed to GitHub successfully!
+    echo  Your site is live at:
+    echo  https://aqmedtech.github.io/aqmedtech-website/
     echo ========================================================
 ) else (
     echo.
