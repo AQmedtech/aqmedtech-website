@@ -994,7 +994,16 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
     const ArticleCard = ({ article, onClick }) => {
       const { Clock, Calendar, MessageSquare } = Icons;
       const initials = article.authorName.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
-      const authorBg = article.authorRole === 'verified-doctor' ? '#0D9488' : '#2563EB';
+      const getAuthorBg = (role) => {
+        if (role === 'verified-doctor') return '#0D9488';
+        if (role === 'nurse-contributor') return '#059669';
+        if (role === 'pharmacist-contributor') return '#0891B2';
+        if (role === 'medlab-contributor') return '#4F46E5';
+        if (role === 'medical-scholar') return '#7C3AED';
+        if (role === 'business-strategist') return '#D97706';
+        return '#2563EB';
+      };
+      const authorBg = getAuthorBg(article.authorRole);
 
       return (
         <div
@@ -1026,7 +1035,23 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                 </div>
                 {article.authorRole === 'verified-doctor' ? (
                   <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-50 text-teal-700 border border-teal-200">
-                    ✅ Doctor
+                    🩺 Doctor
+                  </span>
+                ) : article.authorRole === 'nurse-contributor' ? (
+                  <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    🏥 Nurse
+                  </span>
+                ) : article.authorRole === 'pharmacist-contributor' ? (
+                  <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200">
+                    💊 Pharmacist
+                  </span>
+                ) : article.authorRole === 'medlab-contributor' ? (
+                  <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                    🔬 MedLab
+                  </span>
+                ) : article.authorRole === 'medical-scholar' ? (
+                  <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
+                    🎓 Med Scholar
                   </span>
                 ) : article.authorRole === 'business-strategist' ? (
                   <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
@@ -1156,7 +1181,15 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
               {article.title}
             </h1>
             <div className="flex items-center gap-3 pb-6 border-b border-slate-200">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-black text-base" style={{background: article.authorRole === 'verified-doctor' ? '#0D9488' : '#2563EB'}}>
+              <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-black text-base" style={{
+                background: article.authorRole === 'verified-doctor' ? '#0D9488'
+                  : article.authorRole === 'nurse-contributor' ? '#059669'
+                  : article.authorRole === 'pharmacist-contributor' ? '#0891B2'
+                  : article.authorRole === 'medlab-contributor' ? '#4F46E5'
+                  : article.authorRole === 'medical-scholar' ? '#7C3AED'
+                  : article.authorRole === 'business-strategist' ? '#D97706'
+                  : '#2563EB'
+              }}>
                 {article.authorName.substring(0,2).toUpperCase()}
               </div>
               <div>
@@ -1165,7 +1198,23 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                 <div className="flex items-center flex-wrap gap-2 mt-1 text-xs text-slate-500">
                   {article.authorRole === 'verified-doctor' ? (
                     <span className="font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200">
-                      ✅ Verified Doctor
+                      🩺 Verified Doctor
+                    </span>
+                  ) : article.authorRole === 'nurse-contributor' ? (
+                    <span className="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                      🏥 Registered Nurse / Midwife
+                    </span>
+                  ) : article.authorRole === 'pharmacist-contributor' ? (
+                    <span className="font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded border border-cyan-200">
+                      💊 Clinical Pharmacist
+                    </span>
+                  ) : article.authorRole === 'medlab-contributor' ? (
+                    <span className="font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                      🔬 Medical Laboratory Scientist
+                    </span>
+                  ) : article.authorRole === 'medical-scholar' ? (
+                    <span className="font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+                      🎓 Medical Scholar / Student
                     </span>
                   ) : article.authorRole === 'business-strategist' ? (
                     <span className="font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
@@ -1196,6 +1245,17 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
               </div>
             </div>
 
+            {/* Medical Scholar / Student Editorial Notice */}
+            {article.authorRole === 'medical-scholar' && (
+              <div className="my-4 p-4 rounded-2xl bg-purple-50/80 border border-purple-200 text-purple-900 flex items-start gap-3">
+                <span className="text-xl flex-shrink-0">🎓</span>
+                <div className="text-xs leading-relaxed">
+                  <strong className="font-bold text-purple-950 block mb-0.5">Clinical Scholar Publication:</strong>
+                  This article is authored by an advanced medical/healthcare scholar ({article.authorCredential || 'Clinical Student'}) and reviewed for clinical accuracy by the AQMedTech Editorial Board.
+                </div>
+              </div>
+            )}
+
             <div className="prose max-w-none text-slate-700 leading-relaxed text-base sm:text-lg space-y-5">
               {paragraphs.map((p, idx) => (
                 <React.Fragment key={idx}>
@@ -1221,7 +1281,15 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
             {/* Author Profile Bio Box */}
             <div className="my-8 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-start gap-4">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-lg flex-shrink-0" style={{background: article.authorRole === 'verified-doctor' ? '#0D9488' : '#2563EB'}}>
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-lg flex-shrink-0" style={{
+                  background: article.authorRole === 'verified-doctor' ? '#0D9488'
+                    : article.authorRole === 'nurse-contributor' ? '#059669'
+                    : article.authorRole === 'pharmacist-contributor' ? '#0891B2'
+                    : article.authorRole === 'medlab-contributor' ? '#4F46E5'
+                    : article.authorRole === 'medical-scholar' ? '#7C3AED'
+                    : article.authorRole === 'business-strategist' ? '#D97706'
+                    : '#2563EB'
+                }}>
                   {article.authorName.substring(0,2).toUpperCase()}
                 </div>
                 <div>
@@ -1230,6 +1298,26 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                     {article.authorRole === 'verified-doctor' ? (
                       <span className="text-[10px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200">
                         🩺 Doctor
+                      </span>
+                    ) : article.authorRole === 'nurse-contributor' ? (
+                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                        🏥 Nurse
+                      </span>
+                    ) : article.authorRole === 'pharmacist-contributor' ? (
+                      <span className="text-[10px] font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded border border-cyan-200">
+                        💊 Pharmacist
+                      </span>
+                    ) : article.authorRole === 'medlab-contributor' ? (
+                      <span className="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                        🔬 MedLab
+                      </span>
+                    ) : article.authorRole === 'medical-scholar' ? (
+                      <span className="text-[10px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+                        🎓 Med Scholar
+                      </span>
+                    ) : article.authorRole === 'business-strategist' ? (
+                      <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                        📈 Business
                       </span>
                     ) : (
                       <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
@@ -1524,12 +1612,30 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
 
       const handleRegisterContributor = (e) => {
         e.preventDefault();
+        let calculatedRole = 'Tech & Systems Specialist';
+        if (regForm.pillar === 'business') {
+          calculatedRole = 'Business Growth Strategist';
+        } else if (regForm.pillar === 'medical') {
+          const creds = (regForm.credentials || '').toLowerCase();
+          if (creds.includes('student') || creds.includes('scholar') || creds.includes('mbbs student')) {
+            calculatedRole = 'Medical Scholar / Student';
+          } else if (creds.includes('nurse') || creds.includes('rn') || creds.includes('midwife')) {
+            calculatedRole = 'Registered Nurse / Midwife';
+          } else if (creds.includes('pharm') || creds.includes('pharmacist')) {
+            calculatedRole = 'Clinical Pharmacist';
+          } else if (creds.includes('lab') || creds.includes('mls') || creds.includes('medlab')) {
+            calculatedRole = 'Medical Laboratory Scientist';
+          } else {
+            calculatedRole = 'Healthcare & Medical Professional';
+          }
+        }
+
         const newContrib = {
           id: Date.now(),
           name: regForm.name.trim(),
           email: regForm.email.trim(),
           pillar: regForm.pillar,
-          roleName: regForm.pillar === 'medical' ? 'Verified Medical Doctor' : regForm.pillar === 'business' ? 'Business Growth Strategist' : 'Tech & Systems Specialist',
+          roleName: calculatedRole,
           credentials: regForm.credentials.trim(),
           licenseOrLink: regForm.licenseOrLink.trim(),
           bio: regForm.bio.trim(),
@@ -1714,7 +1820,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                           onChange={(e) => setRegForm(p => ({ ...p, pillar: e.target.value }))}
                           className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-medium focus:border-blue-500 focus:outline-none bg-slate-50"
                         >
-                          <option value="medical">🩺 Medical & Clinical Professional (Doctor, Pharmacist, Surgeon)</option>
+                          <option value="medical">🩺 Healthcare & Medical Scholars (Doctors, Nurses, Pharmacists, MedLab & MBBS/Health Students)</option>
                           <option value="tech">💻 Tech & Digital Health Specialist (Software Engineer, AI, Data)</option>
                           <option value="business">📈 Business & Growth Strategist (Healthcare Administrator, Consultant)</option>
                         </select>
@@ -1726,7 +1832,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                           <input
                             type="text"
                             required
-                            placeholder={regForm.pillar === 'medical' ? "e.g. Dr. Tunde Adebayo" : "e.g. Chukwudi Okafor"}
+                            placeholder={regForm.pillar === 'medical' ? "e.g. Dr. Tunde Adebayo or Fatima Bello" : "e.g. Chukwudi Okafor"}
                             value={regForm.name}
                             onChange={(e) => setRegForm(p => ({ ...p, name: e.target.value }))}
                             className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:border-blue-500 focus:outline-none"
@@ -1737,7 +1843,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                           <input
                             type="email"
                             required
-                            placeholder="e.g. name@hospital.com or org"
+                            placeholder="e.g. name@hospital.com or university email"
                             value={regForm.email}
                             onChange={(e) => setRegForm(p => ({ ...p, email: e.target.value }))}
                             className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:border-blue-500 focus:outline-none"
@@ -1747,14 +1853,14 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
 
                       <div>
                         <label className="block text-xs font-bold text-slate-700 mb-1">
-                          {regForm.pillar === 'medical' ? "Medical Credentials & Specialty *" : regForm.pillar === 'tech' ? "Technical Role & Qualifications *" : "Business Title & Specialization *"}
+                          {regForm.pillar === 'medical' ? "Healthcare Credentials, Specialty, or Student Level *" : regForm.pillar === 'tech' ? "Technical Role & Qualifications *" : "Business Title & Specialization *"}
                         </label>
                         <input
                           type="text"
                           required
                           placeholder={
                             regForm.pillar === 'medical'
-                              ? "e.g. MBBS, FMCP — Consultant Neurologist"
+                              ? "e.g. MBBS Doctor, RN Nurse, BMLS MedLab, PharmD, or 500L MBBS Student (UNILAG)"
                               : regForm.pillar === 'tech'
                               ? "e.g. Lead Systems Engineer, MSc Computer Science"
                               : "e.g. Healthcare Operations Consultant, MBA"
@@ -1767,11 +1873,11 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
 
                       <div>
                         <label className="block text-xs font-bold text-slate-700 mb-1">
-                          {regForm.pillar === 'medical' ? "License / Council Reg No. or LinkedIn" : regForm.pillar === 'tech' ? "GitHub / Portfolio URL or LinkedIn" : "LinkedIn / Company Website"}
+                          {regForm.pillar === 'medical' ? "License / Council Reg No., University & Matric No. (if student), or LinkedIn" : regForm.pillar === 'tech' ? "GitHub / Portfolio URL or LinkedIn" : "LinkedIn / Company Website"}
                         </label>
                         <input
                           type="text"
-                          placeholder="e.g. MDCN/12345 or https://linkedin.com/in/..."
+                          placeholder={regForm.pillar === 'medical' ? "e.g. MDCN/12345, NMCN/67890, 500L MBBS UNILAG, or LinkedIn URL" : "e.g. https://linkedin.com/in/... or GitHub"}
                           value={regForm.licenseOrLink}
                           onChange={(e) => setRegForm(p => ({ ...p, licenseOrLink: e.target.value }))}
                           className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:border-blue-500 focus:outline-none"
@@ -1960,7 +2066,11 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                       onChange={(e) => setArticleForm(p => ({...p, authorRole: e.target.value}))}
                       className="w-full px-4 py-2.5 rounded-xl border text-sm"
                     >
-                      <option value="verified-doctor">Verified Medical Doctor (✅ Doctor)</option>
+                      <option value="verified-doctor">Verified Medical Doctor (🩺 Doctor)</option>
+                      <option value="nurse-contributor">Registered Nurse / Midwife (🏥 Nurse)</option>
+                      <option value="pharmacist-contributor">Clinical Pharmacist (💊 Pharmacist)</option>
+                      <option value="medlab-contributor">Medical Laboratory Scientist (🔬 MedLab)</option>
+                      <option value="medical-scholar">Medical / Clinical Student (🎓 Med Scholar)</option>
                       <option value="tech-contributor">Tech & Software Contributor (💻 Tech)</option>
                       <option value="business-strategist">Business & Growth Strategist (📈 Business)</option>
                     </select>
@@ -2140,8 +2250,10 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                 ) : (
                   <div className="space-y-3">
                     {contributors.filter(c => c.status === 'pending').map((c) => {
-                      const pillarIcon = c.pillar === 'medical' ? '🩺' : c.pillar === 'business' ? '📈' : '💻';
-                      const pillarName = c.pillar === 'medical' ? 'Medical Doctor' : c.pillar === 'business' ? 'Business Strategist' : 'Tech Specialist';
+                      const pillarIcon = c.pillar === 'medical'
+                        ? (c.roleName && c.roleName.includes('Nurse') ? '🏥' : c.roleName && c.roleName.includes('Student') ? '🎓' : c.roleName && c.roleName.includes('Lab') ? '🔬' : c.roleName && c.roleName.includes('Pharm') ? '💊' : '🩺')
+                        : c.pillar === 'business' ? '📈' : '💻';
+                      const pillarName = c.roleName || (c.pillar === 'medical' ? 'Healthcare Contributor' : c.pillar === 'business' ? 'Business Strategist' : 'Tech Specialist');
                       const badgeClass = c.pillar === 'medical' ? 'bg-teal-50 text-teal-800 border-teal-200' : c.pillar === 'business' ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-800 border-blue-200';
                       return (
                         <div key={c.id} className="p-4 rounded-xl border border-amber-200 bg-amber-50/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -2193,7 +2305,9 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                 </h4>
                 <div className="space-y-2.5">
                   {contributors.filter(c => c.status === 'approved').map((c) => {
-                    const pillarIcon = c.pillar === 'medical' ? '🩺' : c.pillar === 'business' ? '📈' : '💻';
+                    const pillarIcon = c.pillar === 'medical'
+                      ? (c.roleName && c.roleName.includes('Nurse') ? '🏥' : c.roleName && c.roleName.includes('Student') ? '🎓' : c.roleName && c.roleName.includes('Lab') ? '🔬' : c.roleName && c.roleName.includes('Pharm') ? '💊' : '🩺')
+                      : c.pillar === 'business' ? '📈' : '💻';
                     return (
                       <div key={c.id} className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between gap-3">
                         <div>
@@ -2201,7 +2315,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                             <span className="text-xs">{pillarIcon}</span>
                             <span className="font-bold text-slate-900 text-xs sm:text-sm">{c.name}</span>
                             <span className="text-[10px] text-teal-700 bg-teal-50 px-2 py-0.5 rounded font-bold border border-teal-200">
-                              Verified
+                              {c.roleName || 'Verified'}
                             </span>
                           </div>
                           <p className="text-[11px] text-slate-500">{c.credentials} · <span className="font-mono text-slate-600">{c.email}</span></p>
