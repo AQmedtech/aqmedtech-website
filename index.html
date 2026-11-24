@@ -162,6 +162,7 @@
         description: "AI-powered pharmacology quiz app for medical students and pharmacy professionals. Features adaptive learning, drug interaction checkers, and performance analytics.",
         techStack: ["React", "Node.js", "OpenAI API", "PostgreSQL"],
         imageUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600",
+        liveUrl: "https://pharmaquiz-demo.vercel.app",
         featured: true,
         year: 2024,
       },
@@ -173,6 +174,7 @@
         description: "Full telemedicine and patient management portal for private clinics. Includes appointment booking, teleconsultations, digital prescriptions, and payment integration.",
         techStack: ["Next.js", "Supabase", "Tailwind", "Stripe"],
         imageUrl: "https://images.unsplash.com/photo-1587351021355-a479a299d2f9?w=600",
+        liveUrl: "https://clinicflow-portal.vercel.app",
         featured: true,
         year: 2024,
       },
@@ -184,6 +186,7 @@
         description: "Custom multi-vendor e-commerce platform with real-time inventory, automated invoicing, logistics tracking, and a CRM dashboard for a Lagos-based retail group.",
         techStack: ["React", "Django", "Redis", "AWS S3"],
         imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600",
+        liveUrl: "https://shop-suite-demo.vercel.app",
         featured: false,
         year: 2023,
       },
@@ -195,6 +198,7 @@
         description: "The AQMedTech Innovations platform itself — a multi-pillar digital ecosystem combining a tech agency portfolio, product ad marketplace, and expert health-tech news hub.",
         techStack: ["Next.js", "Supabase", "Tailwind CSS", "Vercel"],
         imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600",
+        liveUrl: "https://aqmedtech.github.io/aqmedtech-website/",
         featured: true,
         year: 2024,
       },
@@ -450,13 +454,13 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
     }
 
     function initializeData() {
-      // Version 2.4 adds Multi-Pillar Contributors, Article Like & Views counters
-      if (localStorage.getItem('aqmt_schema_version') !== '2.4') {
+      // Version 2.5 adds Live Project Preview URLs to Portfolio
+      if (localStorage.getItem('aqmt_schema_version') !== '2.5') {
         saveData('aqmt_ads', SEED_ADS);
         saveData('aqmt_articles', SEED_ARTICLES);
         saveData('aqmt_portfolio', PORTFOLIO_PROJECTS);
         saveData('aqmt_contributors', SEED_CONTRIBUTORS);
-        localStorage.setItem('aqmt_schema_version', '2.4');
+        localStorage.setItem('aqmt_schema_version', '2.5');
         localStorage.setItem('aqmt_initialized', 'true');
       }
     }
@@ -732,7 +736,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                 Featured Portfolio Projects
               </h2>
               <p className="text-slate-500 text-base mt-2 max-w-xl mx-auto">
-                Production-grade applications built for healthcare and commercial clients.
+                Production-grade applications and live platforms built for healthcare and commercial clients.
               </p>
             </div>
 
@@ -742,15 +746,26 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                   key={project.id}
                   className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all border border-slate-200 flex flex-col"
                 >
-                  <div className="relative h-56 w-full bg-slate-900 overflow-hidden">
+                  <div className="relative h-56 w-full bg-slate-900 overflow-hidden group">
                     <img
-                      src={project.imageUrl}
+                      src={project.imageUrl || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600'}
                       alt={project.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
                       {project.category}
                     </div>
+                    {project.liveUrl && project.liveUrl !== '#' && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute top-3 right-3 bg-slate-900/85 backdrop-blur hover:bg-blue-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow flex items-center gap-1 transition-colors"
+                      >
+                        <span>Live Site</span>
+                        <span>↗</span>
+                      </a>
+                    )}
                   </div>
                   <div className="p-6 flex flex-col flex-1 justify-between">
                     <div>
@@ -765,12 +780,27 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                         ))}
                       </div>
                     </div>
-                    <button
-                      onClick={() => onOpenModal('website')}
-                      className="w-full py-2.5 rounded-xl border border-blue-600 text-blue-600 font-semibold text-sm hover:bg-blue-600 hover:text-white transition-colors"
-                    >
-                      Request a Similar App →
-                    </button>
+                    <div className="pt-2 border-t border-slate-100 flex flex-col sm:flex-row gap-2.5">
+                      {project.liveUrl && project.liveUrl !== '#' && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow transition-all group"
+                        >
+                          <span>🌐 Live Preview</span>
+                          <span className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+                        </a>
+                      )}
+                      <button
+                        onClick={() => onOpenModal('website')}
+                        className={`py-2.5 px-3 rounded-xl border border-blue-600 text-blue-600 font-bold text-xs sm:text-sm hover:bg-blue-50 transition-colors text-center ${
+                          project.liveUrl && project.liveUrl !== '#' ? 'flex-1' : 'w-full bg-blue-600 !text-white hover:!bg-blue-700'
+                        }`}
+                      >
+                        Request a Similar App →
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -1581,8 +1611,8 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
       const [adSuccess, setAdSuccess] = React.useState(false);
 
       const [projForm, setProjForm] = React.useState({
-        title: '', category: 'Health-Tech & Medical Apps', client: '',
-        duration: '', metrics: '', tags: '', description: '', liveUrl: ''
+        title: '', subtitle: '', category: 'Health-Tech & Medical Apps', client: '',
+        duration: '', metrics: '', tags: '', description: '', liveUrl: '', imageUrl: ''
       });
       const [projSuccess, setProjSuccess] = React.useState(false);
 
@@ -1711,23 +1741,44 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
         e.preventDefault();
         const newProj = {
           id: Date.now(),
-          title: projForm.title,
+          title: projForm.title.trim(),
+          subtitle: projForm.subtitle ? projForm.subtitle.trim() : (projForm.client ? `Client: ${projForm.client.trim()}` : 'Custom Application'),
           category: projForm.category,
-          client: projForm.client || 'Confidential Client',
-          duration: projForm.duration || '4 Weeks',
-          metrics: projForm.metrics || '100% Satisfaction',
-          tags: projForm.tags ? projForm.tags.split(',').map(t => t.trim()) : ['React', 'HealthTech'],
-          description: projForm.description,
-          liveUrl: projForm.liveUrl || '#'
+          client: projForm.client ? projForm.client.trim() : 'Confidential Client',
+          duration: projForm.duration ? projForm.duration.trim() : '4 Weeks',
+          metrics: projForm.metrics ? projForm.metrics.trim() : '100% Satisfaction',
+          techStack: projForm.tags ? projForm.tags.split(',').map(t => t.trim()).filter(Boolean) : ['React', 'Next.js', 'Tailwind'],
+          description: projForm.description.trim(),
+          liveUrl: projForm.liveUrl ? projForm.liveUrl.trim() : '',
+          imageUrl: projForm.imageUrl ? projForm.imageUrl.trim() : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600',
+          featured: true,
+          year: new Date().getFullYear()
         };
-        try {
-          const currentProj = JSON.parse(localStorage.getItem('aqmt_portfolio') || '[]');
-          const updated = [newProj, ...currentProj];
-          localStorage.setItem('aqmt_portfolio', JSON.stringify(updated));
-        } catch(e) {}
-        setProjForm({ title: '', category: 'Health-Tech & Medical Apps', client: '', duration: '', metrics: '', tags: '', description: '', liveUrl: '' });
+        const currentList = portfolio || [];
+        const updated = [newProj, ...currentList];
+        if (onUpdatePortfolio) {
+          onUpdatePortfolio(updated);
+        } else {
+          try {
+            localStorage.setItem('aqmt_portfolio', JSON.stringify(updated));
+          } catch(err) {}
+        }
+        setProjForm({ title: '', subtitle: '', category: 'Health-Tech & Medical Apps', client: '', duration: '', metrics: '', tags: '', description: '', liveUrl: '', imageUrl: '' });
         setProjSuccess(true);
-        setTimeout(() => setProjSuccess(false), 3000);
+        setTimeout(() => setProjSuccess(false), 4000);
+      };
+
+      const handleDeleteProject = (projId) => {
+        if (!confirm('Are you sure you want to remove this project from your portfolio?')) return;
+        const currentList = portfolio || [];
+        const updated = currentList.filter(p => p.id !== projId);
+        if (onUpdatePortfolio) {
+          onUpdatePortfolio(updated);
+        } else {
+          try {
+            localStorage.setItem('aqmt_portfolio', JSON.stringify(updated));
+          } catch(err) {}
+        }
       };
 
       // 1. LOCKED VIEW (Requires Passcode or Allows New Contributor Registration)
@@ -2548,6 +2599,8 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                       <option>Web Design & Development</option>
                       <option>Enterprise Web Systems</option>
                       <option>Advertising & Growth</option>
+                      <option>Full-Stack</option>
+                      <option>E-Commerce</option>
                     </select>
                   </div>
                   <div>
@@ -2561,6 +2614,33 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                     />
                   </div>
                 </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
+                      🌐 Live Website / App URL (Optional)
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="https://example.com or https://project.vercel.app"
+                      value={projForm.liveUrl}
+                      onChange={(e) => setProjForm(p => ({...p, liveUrl: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                    <p className="text-[11px] text-slate-400 mt-1">If provided, visitors will see a "🌐 Live Preview ↗" button on your website.</p>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">Subtitle / Tagline</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Seamless Healthcare Management"
+                      value={projForm.subtitle}
+                      onChange={(e) => setProjForm(p => ({...p, subtitle: e.target.value}))}
+                      className="w-full px-4 py-2.5 rounded-xl border text-sm focus:border-blue-500 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-600 mb-1">Duration</label>
@@ -2583,16 +2663,55 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                     />
                   </div>
                 </div>
+
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Tech Stack Tags (comma-separated)</label>
                   <input
                     type="text"
-                    placeholder="e.g. Next.js, WebRTC, Tailwind, PostgreSQL"
+                    placeholder="e.g. React, Next.js, WebRTC, Tailwind, PostgreSQL"
                     value={projForm.tags}
                     onChange={(e) => setProjForm(p => ({...p, tags: e.target.value}))}
                     className="w-full px-4 py-2.5 rounded-xl border text-sm"
                   />
                 </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Project Screenshot / Cover Image (Upload or URL)</label>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="text"
+                      placeholder="https://images.unsplash.com/... or upload below"
+                      value={projForm.imageUrl}
+                      onChange={(e) => setProjForm(p => ({...p, imageUrl: e.target.value}))}
+                      className="flex-1 px-4 py-2.5 rounded-xl border text-sm"
+                    />
+                    <label className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap">
+                      <span>📁 Upload Screenshot</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            try {
+                              const compressed = await compressImageFile(file, 1000, 0.75);
+                              setProjForm(p => ({...p, imageUrl: compressed}));
+                            } catch(err) {
+                              console.error('Compression failed', err);
+                            }
+                          }
+                        }}
+                      />
+                    </label>
+                  </div>
+                  {projForm.imageUrl && (
+                    <div className="mt-2 h-24 w-40 rounded-xl overflow-hidden border border-slate-200">
+                      <img src={projForm.imageUrl} alt="Project preview" className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                </div>
+
                 <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Project Description *</label>
                   <textarea
@@ -2608,6 +2727,61 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                   Add Project to Agency Portfolio 🚀
                 </button>
               </form>
+
+              <h4 className="font-bold text-slate-900 text-base mb-3 border-t pt-8">
+                Existing Agency Portfolio Projects ({(portfolio || []).length})
+              </h4>
+              <div className="space-y-3">
+                {(portfolio || []).map((proj) => (
+                  <div key={proj.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 gap-3">
+                    <div className="flex items-center gap-3">
+                      {proj.imageUrl && (
+                        <div className="w-14 h-12 rounded-lg overflow-hidden bg-slate-200 flex-shrink-0">
+                          <img src={proj.imageUrl} alt={proj.title} className="w-full h-full object-cover" />
+                        </div>
+                      )}
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <p className="font-bold text-slate-900 text-sm">{proj.title}</p>
+                          <span className="text-[10px] bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded-full">{proj.category}</span>
+                        </div>
+                        {proj.liveUrl && proj.liveUrl !== '#' ? (
+                          <a
+                            href={proj.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-blue-600 hover:underline flex items-center gap-1 mt-0.5 font-medium"
+                          >
+                            <span>🌐 {proj.liveUrl}</span>
+                            <span className="text-[10px]">↗</span>
+                          </a>
+                        ) : (
+                          <span className="text-xs text-slate-400 mt-0.5 block italic">No live link attached</span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 self-end sm:self-center">
+                      {proj.liveUrl && proj.liveUrl !== '#' && (
+                        <a
+                          href={proj.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-bold"
+                        >
+                          Visit ↗
+                        </a>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteProject(proj.id)}
+                        className="px-3 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 border border-red-200 rounded-lg text-xs font-bold"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
