@@ -879,7 +879,18 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
               )}
             </div>
           </div>
-          <div className="p-5 pt-0">
+          <div className="p-5 pt-0 flex flex-col gap-2">
+            {ad.productUrl && ad.productUrl !== '#' && (
+              <a
+                href={ad.productUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 rounded-xl font-bold text-sm text-white bg-slate-900 hover:bg-blue-600 flex items-center justify-center gap-1.5 transition-all shadow"
+              >
+                <span>🔗 View Product Link</span>
+                <span className="text-xs">↗</span>
+              </a>
+            )}
             <button
               onClick={handleWA}
               className="w-full py-2.5 rounded-xl font-bold text-sm text-white flex items-center justify-center gap-2 hover:opacity-95 transition-all shadow"
@@ -1618,7 +1629,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
 
       const [adForm, setAdForm] = React.useState({
         title: '', price: '', priceUSD: '', category: 'Medical Equipment',
-        location: '', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: ''
+        location: '', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: '', productUrl: ''
       });
       const [adSuccess, setAdSuccess] = React.useState(false);
       const [editingAdId, setEditingAdId] = React.useState(null);
@@ -1733,7 +1744,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
         onUpdateArticles(updated);
       };
 
-      const emptyAdForm = { title: '', price: '', priceUSD: '', category: 'Medical Equipment', location: '', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: '' };
+      const emptyAdForm = { title: '', price: '', priceUSD: '', category: 'Medical Equipment', location: '', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: '', productUrl: '' };
 
       const handleStartEditAd = (ad) => {
         setEditingAdId(ad.id);
@@ -1747,7 +1758,8 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
           description: ad.description || '',
           sellerName: ad.sellerName || '',
           sellerWhatsapp: ad.sellerWhatsapp || '',
-          imageUrl: ad.imageUrl || ''
+          imageUrl: ad.imageUrl || '',
+          productUrl: ad.productUrl || ''
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
       };
@@ -2600,6 +2612,16 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                   </div>
                 </div>
                 <div>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">🔗 Product / Website Link (Optional)</label>
+                  <input
+                    type="url"
+                    placeholder="https://example.com/product (visitors can click to visit)"
+                    value={adForm.productUrl || ''}
+                    onChange={(e) => setAdForm(p => ({...p, productUrl: e.target.value}))}
+                    className="w-full px-4 py-2.5 rounded-xl border text-sm focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+                <div>
                   <label className="block text-xs font-bold text-slate-600 mb-1">Product Photo (Upload Image or Paste URL) *</label>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <input
@@ -2661,6 +2683,16 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                       <p className="text-xs text-blue-600 font-semibold">{ad.price} · {ad.sellerName}</p>
                     </div>
                     <div className="flex items-center gap-2">
+                      {ad.productUrl && ad.productUrl !== '#' && (
+                        <a
+                          href={ad.productUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1 bg-slate-900 text-white hover:bg-slate-800 rounded-lg text-xs font-bold"
+                        >
+                          Visit ↗
+                        </a>
+                      )}
                       <button
                         type="button"
                         onClick={() => handleStartEditAd(ad)}
