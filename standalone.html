@@ -3116,8 +3116,11 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                 <Hero onOpenModal={openModal} onNavigate={navigate} />
                 <Services onOpenModal={openModal} />
 
-                {/* Strip 1: Top Ads */}
-                <section className="py-16 bg-slate-100 border-y border-slate-200">
+                {/* Strip 1: Featured Portfolio Projects */}
+                <Portfolio projects={portfolio} onOpenModal={openModal} />
+
+                {/* Strip 2: Featured Products & Equipment (Marketplace Deals) */}
+                <section className="py-16 bg-white border-t border-slate-200">
                   <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
                       <div>
@@ -3150,10 +3153,8 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                   </div>
                 </section>
 
-                <Portfolio projects={portfolio} onOpenModal={openModal} />
-
-                {/* Strip 2: Latest Articles */}
-                <section className="py-16 bg-white border-t border-slate-200">
+                {/* Strip 3: Latest Articles */}
+                <section className="py-16 bg-slate-50 border-t border-slate-200">
                   <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
                       <div>
