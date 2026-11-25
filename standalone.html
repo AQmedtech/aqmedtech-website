@@ -5,6 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AQMedTech Innovations | Web Dev • Health-Tech • Ads & Insights</title>
   <meta name="description" content="We build high-performance websites, custom medical-grade health applications, and drive high-converting traffic to your business.">
+  <meta name="theme-color" content="#0F172A">
+
+  <!-- Brand SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%232563EB'/%3E%3Cstop offset='100%25' stop-color='%230D9488'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='900' font-size='28'%3EAQ%3C/text%3E%3C/svg%3E">
+
+  <!-- Open Graph / WhatsApp / LinkedIn Social Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aqmedtech.github.io/aqmedtech-website/">
+  <meta property="og:site_name" content="AQMedTech Innovations">
+  <meta property="og:title" content="AQMedTech Innovations | Web Dev • Health-Tech • Ads & Insights">
+  <meta property="og:description" content="Nigeria's premier Health-Tech agency & digital marketplace. Custom websites, telemedicine portals, product ads, and verified medical & tech insights.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AQMedTech Innovations | Web Dev • Health-Tech • Ads & Insights">
+  <meta name="twitter:description" content="Custom websites, medical-grade health apps, product marketplace, and expert health-tech insights.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200">
+
+  <!-- Performance Preconnects -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://unpkg.com">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -811,12 +833,11 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
     };
 
     // --- AD CARD ---
-    const AdCard = ({ ad, onWhatsAppClick }) => {
-      const { Eye, MousePointer, MessageCircle } = Icons;
+    const AdCard = ({ ad }) => {
+      const { MessageCircle } = Icons;
       const handleWA = () => {
         const msg = encodeURIComponent(`Hi! I saw "${ad.title}" on AQMedTech (priced at ${ad.price}) and I'm interested. Please share more details.`);
         window.open(`https://wa.me/${ad.sellerWhatsapp}?text=${msg}`, '_blank');
-        if (onWhatsAppClick) onWhatsAppClick(ad.id);
       };
 
       return (
@@ -840,24 +861,22 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
               <h3 className="font-bold text-slate-900 text-base leading-tight mb-2 line-clamp-1">{ad.title}</h3>
               <p className="text-slate-500 text-xs leading-relaxed mb-3 line-clamp-2">{ad.description}</p>
               
-              {/* Location Badge */}
-              <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-2">
-                <span>📍</span>
-                <span className="font-medium text-slate-600">{ad.location || 'Nationwide Delivery'}</span>
-              </div>
-
-              <div className="flex items-center justify-between text-xs text-slate-400 mb-2 pt-2 border-t border-slate-100">
-                <span>Sold by: <strong className="font-semibold text-slate-700">{ad.sellerName}</strong></span>
-                {ad.duration && (
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
-                    ⏱️ {ad.duration}
-                  </span>
-                )}
-              </div>
-              <div className="flex gap-4 text-xs text-slate-400">
-                <span className="flex items-center gap-1"><Eye size={12} /> {ad.views} views</span>
-                <span className="flex items-center gap-1"><MousePointer size={12} /> {ad.clicks} clicks</span>
-              </div>
+              {/* Only render Location & Duration when provided in Admin Portal */}
+              {(ad.location || ad.duration) && (
+                <div className="flex items-center justify-between gap-2 text-xs text-slate-500 pt-2.5 border-t border-slate-100">
+                  {ad.location ? (
+                    <div className="flex items-center gap-1.5">
+                      <span>📍</span>
+                      <span className="font-medium text-slate-600">{ad.location}</span>
+                    </div>
+                  ) : <span />}
+                  {ad.duration && (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
+                      ⏱️ {ad.duration}
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <div className="p-5 pt-0">
@@ -909,7 +928,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
     };
 
     // --- MARKETPLACE PAGE ---
-    const MarketplacePage = ({ ads, onUpdateAds, onOpenModal }) => {
+    const MarketplacePage = ({ ads, onOpenModal }) => {
       const [activeCategory, setActiveCategory] = React.useState('All');
       const [searchQuery, setSearchQuery] = React.useState('');
       const { Search } = Icons;
@@ -923,13 +942,6 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
           ad.sellerName.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
       });
-
-      const handleWhatsAppClick = (adId) => {
-        const updated = ads.map(ad =>
-          ad.id === adId ? { ...ad, clicks: (ad.clicks || 0) + 1 } : ad
-        );
-        if (onUpdateAds) onUpdateAds(updated);
-      };
 
       return (
         <div className="min-h-screen bg-slate-50">
@@ -997,7 +1009,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredAds.map(ad => (
-                <AdCard key={ad.id} ad={ad} onWhatsAppClick={handleWhatsAppClick} />
+                <AdCard key={ad.id} ad={ad} />
               ))}
 
               <div className="rounded-2xl border-2 border-dashed border-blue-400 bg-gradient-to-br from-blue-50 to-teal-50 flex flex-col items-center justify-center p-8 text-center min-h-[340px]">
@@ -1609,12 +1621,14 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
         location: '', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: ''
       });
       const [adSuccess, setAdSuccess] = React.useState(false);
+      const [editingAdId, setEditingAdId] = React.useState(null);
 
       const [projForm, setProjForm] = React.useState({
         title: '', subtitle: '', category: 'Health-Tech & Medical Apps', client: '',
         duration: '', metrics: '', tags: '', description: '', liveUrl: '', imageUrl: ''
       });
       const [projSuccess, setProjSuccess] = React.useState(false);
+      const [editingProjId, setEditingProjId] = React.useState(null);
 
       // Portal entry mode: 'admin' (via #admin or Ctrl+Shift+A) vs 'contributor' (via footer link or #contributor)
       const portalMode = portalType || (window.location.hash === '#contributor' ? 'contributor' : 'admin');
@@ -1719,43 +1733,122 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
         onUpdateArticles(updated);
       };
 
+      const emptyAdForm = { title: '', price: '', priceUSD: '', category: 'Medical Equipment', location: '', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: '' };
+
+      const handleStartEditAd = (ad) => {
+        setEditingAdId(ad.id);
+        setAdForm({
+          title: ad.title || '',
+          price: ad.price || '',
+          priceUSD: ad.priceUSD || '',
+          category: ad.category || 'Medical Equipment',
+          location: ad.location || '',
+          duration: ad.duration || '30 Days (Active)',
+          description: ad.description || '',
+          sellerName: ad.sellerName || '',
+          sellerWhatsapp: ad.sellerWhatsapp || '',
+          imageUrl: ad.imageUrl || ''
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      const handleCancelEditAd = () => {
+        setEditingAdId(null);
+        setAdForm(emptyAdForm);
+      };
+
       const handleAddAd = (e) => {
         e.preventDefault();
         // Clean and validate WhatsApp digits
         const cleanWhatsapp = adForm.sellerWhatsapp.replace(/[^0-9]/g, '');
-        const newAd = {
-          id: Date.now(),
-          ...adForm,
-          sellerWhatsapp: cleanWhatsapp,
-          views: 10,
-          clicks: 0,
-          featured: true
-        };
-        onUpdateAds([newAd, ...ads]);
-        setAdForm({ title: '', price: '', priceUSD: '', category: 'Medical Equipment', location: '', duration: '30 Days (Active)', description: '', sellerName: '', sellerWhatsapp: '', imageUrl: '' });
+        if (editingAdId) {
+          const updated = ads.map(a => a.id === editingAdId ? {
+            ...a,
+            ...adForm,
+            sellerWhatsapp: cleanWhatsapp
+          } : a);
+          onUpdateAds(updated);
+          setEditingAdId(null);
+        } else {
+          const newAd = {
+            id: Date.now(),
+            ...adForm,
+            sellerWhatsapp: cleanWhatsapp,
+            views: 10,
+            clicks: 0,
+            featured: true
+          };
+          onUpdateAds([newAd, ...ads]);
+        }
+        setAdForm(emptyAdForm);
         setAdSuccess(true);
         setTimeout(() => setAdSuccess(false), 3000);
       };
 
+      const emptyProjForm = { title: '', subtitle: '', category: 'Health-Tech & Medical Apps', client: '', duration: '', metrics: '', tags: '', description: '', liveUrl: '', imageUrl: '' };
+
+      const handleStartEditProject = (proj) => {
+        setEditingProjId(proj.id);
+        setProjForm({
+          title: proj.title || '',
+          subtitle: proj.subtitle || '',
+          category: proj.category || 'Health-Tech & Medical Apps',
+          client: proj.client || '',
+          duration: proj.duration || '',
+          metrics: proj.metrics || '',
+          tags: Array.isArray(proj.techStack) ? proj.techStack.join(', ') : (Array.isArray(proj.tags) ? proj.tags.join(', ') : ''),
+          description: proj.description || '',
+          liveUrl: proj.liveUrl && proj.liveUrl !== '#' ? proj.liveUrl : '',
+          imageUrl: proj.imageUrl || ''
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      const handleCancelEditProject = () => {
+        setEditingProjId(null);
+        setProjForm(emptyProjForm);
+      };
+
       const handleAddProject = (e) => {
         e.preventDefault();
-        const newProj = {
-          id: Date.now(),
-          title: projForm.title.trim(),
-          subtitle: projForm.subtitle ? projForm.subtitle.trim() : (projForm.client ? `Client: ${projForm.client.trim()}` : 'Custom Application'),
-          category: projForm.category,
-          client: projForm.client ? projForm.client.trim() : 'Confidential Client',
-          duration: projForm.duration ? projForm.duration.trim() : '4 Weeks',
-          metrics: projForm.metrics ? projForm.metrics.trim() : '100% Satisfaction',
-          techStack: projForm.tags ? projForm.tags.split(',').map(t => t.trim()).filter(Boolean) : ['React', 'Next.js', 'Tailwind'],
-          description: projForm.description.trim(),
-          liveUrl: projForm.liveUrl ? projForm.liveUrl.trim() : '',
-          imageUrl: projForm.imageUrl ? projForm.imageUrl.trim() : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600',
-          featured: true,
-          year: new Date().getFullYear()
-        };
         const currentList = portfolio || [];
-        const updated = [newProj, ...currentList];
+        const parsedTags = projForm.tags ? projForm.tags.split(',').map(t => t.trim()).filter(Boolean) : ['React', 'Next.js', 'Tailwind'];
+        let updated;
+
+        if (editingProjId) {
+          updated = currentList.map(p => p.id === editingProjId ? {
+            ...p,
+            title: projForm.title.trim(),
+            subtitle: projForm.subtitle ? projForm.subtitle.trim() : (p.subtitle || 'Custom Application'),
+            category: projForm.category,
+            client: projForm.client ? projForm.client.trim() : (p.client || 'Confidential Client'),
+            duration: projForm.duration ? projForm.duration.trim() : (p.duration || '4 Weeks'),
+            metrics: projForm.metrics ? projForm.metrics.trim() : (p.metrics || '100% Satisfaction'),
+            techStack: parsedTags,
+            description: projForm.description.trim(),
+            liveUrl: projForm.liveUrl ? projForm.liveUrl.trim() : '',
+            imageUrl: projForm.imageUrl ? projForm.imageUrl.trim() : (p.imageUrl || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600')
+          } : p);
+          setEditingProjId(null);
+        } else {
+          const newProj = {
+            id: Date.now(),
+            title: projForm.title.trim(),
+            subtitle: projForm.subtitle ? projForm.subtitle.trim() : (projForm.client ? `Client: ${projForm.client.trim()}` : 'Custom Application'),
+            category: projForm.category,
+            client: projForm.client ? projForm.client.trim() : 'Confidential Client',
+            duration: projForm.duration ? projForm.duration.trim() : '4 Weeks',
+            metrics: projForm.metrics ? projForm.metrics.trim() : '100% Satisfaction',
+            techStack: parsedTags,
+            description: projForm.description.trim(),
+            liveUrl: projForm.liveUrl ? projForm.liveUrl.trim() : '',
+            imageUrl: projForm.imageUrl ? projForm.imageUrl.trim() : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600',
+            featured: true,
+            year: new Date().getFullYear()
+          };
+          updated = [newProj, ...currentList];
+        }
+
         if (onUpdatePortfolio) {
           onUpdatePortfolio(updated);
         } else {
@@ -1763,7 +1856,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
             localStorage.setItem('aqmt_portfolio', JSON.stringify(updated));
           } catch(err) {}
         }
-        setProjForm({ title: '', subtitle: '', category: 'Health-Tech & Medical Apps', client: '', duration: '', metrics: '', tags: '', description: '', liveUrl: '', imageUrl: '' });
+        setProjForm(emptyProjForm);
         setProjSuccess(true);
         setTimeout(() => setProjSuccess(false), 4000);
       };
@@ -2388,10 +2481,23 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
           {/* TAB 2: MANAGE ADS (Admin Only) */}
           {activeTab === 'ads' && role === 'admin' && (
             <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Post a New Product Advertisement</h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold text-slate-900">
+                  {editingAdId ? '✏️ Edit Marketplace Advertisement' : 'Post a New Product Advertisement'}
+                </h3>
+                {editingAdId && (
+                  <button
+                    type="button"
+                    onClick={handleCancelEditAd}
+                    className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold"
+                  >
+                    Cancel Edit
+                  </button>
+                )}
+              </div>
               {adSuccess && (
                 <div className="mb-4 p-3 bg-green-50 text-green-700 text-xs font-bold rounded-xl">
-                  🎉 Advertisement created and visible in marketplace!
+                  🎉 Advertisement saved and visible in marketplace!
                 </div>
               )}
               <form onSubmit={handleAddAd} className="space-y-4 mb-8">
@@ -2542,24 +2648,34 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                   />
                 </div>
                 <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow">
-                  Add to Marketplace 📢
+                  {editingAdId ? 'Save Ad Changes ✅' : 'Add to Marketplace 📢'}
                 </button>
               </form>
 
               <h4 className="font-bold text-slate-900 text-base mb-3 border-t pt-6">Existing Marketplace Ads</h4>
               <div className="space-y-3">
                 {ads.map((ad) => (
-                  <div key={ad.id} className="flex items-center justify-between p-3 rounded-xl border bg-slate-50">
+                  <div key={ad.id} className="flex items-center justify-between p-3 rounded-xl border bg-slate-50 gap-2">
                     <div>
                       <p className="font-bold text-slate-900 text-sm">{ad.title}</p>
                       <p className="text-xs text-blue-600 font-semibold">{ad.price} · {ad.sellerName}</p>
                     </div>
-                    <button
-                      onClick={() => onUpdateAds(ads.filter(a => a.id !== ad.id))}
-                      className="px-3 py-1 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg text-xs font-bold"
-                    >
-                      Delete
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handleStartEditAd(ad)}
+                        className="px-3 py-1 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg text-xs font-bold"
+                      >
+                        ✏️ Edit
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => onUpdateAds(ads.filter(a => a.id !== ad.id))}
+                        className="px-3 py-1 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg text-xs font-bold"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -2569,10 +2685,23 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
           {/* TAB 3: PORTFOLIO MANAGEMENT (Admin Only) */}
           {activeTab === 'portfolio' && role === 'admin' && (
             <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Add a New Portfolio Project</h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-bold text-slate-900">
+                  {editingProjId ? '✏️ Edit Portfolio Project' : 'Add a New Portfolio Project'}
+                </h3>
+                {editingProjId && (
+                  <button
+                    type="button"
+                    onClick={handleCancelEditProject}
+                    className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold"
+                  >
+                    Cancel Edit
+                  </button>
+                )}
+              </div>
               {projSuccess && (
                 <div className="mb-4 p-3 bg-green-50 text-green-700 text-xs font-bold rounded-xl border border-green-200">
-                  🎉 Portfolio project saved successfully and added to Home page!
+                  🎉 Portfolio project saved successfully and updated on Home page!
                 </div>
               )}
               <form onSubmit={handleAddProject} className="space-y-4">
@@ -2724,7 +2853,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                   />
                 </div>
                 <button type="submit" className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow">
-                  Add Project to Agency Portfolio 🚀
+                  {editingProjId ? 'Save Project Changes ✅' : 'Add Project to Agency Portfolio 🚀'}
                 </button>
               </form>
 
@@ -2771,6 +2900,13 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                           Visit ↗
                         </a>
                       )}
+                      <button
+                        type="button"
+                        onClick={() => handleStartEditProject(proj)}
+                        className="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 rounded-lg text-xs font-bold"
+                      >
+                        ✏️ Edit
+                      </button>
                       <button
                         type="button"
                         onClick={() => handleDeleteProject(proj.id)}
@@ -3140,14 +3276,7 @@ Diagnostic AI represents one of the most exciting frontiers. Tools trained on va
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                       {ads.slice(0, 3).map(ad => (
-                        <AdCard
-                          key={ad.id}
-                          ad={ad}
-                          onWhatsAppClick={(id) => {
-                            const updated = ads.map(a => a.id === id ? {...a, clicks: (a.clicks || 0) + 1} : a);
-                            updateAds(updated);
-                          }}
-                        />
+                        <AdCard key={ad.id} ad={ad} />
                       ))}
                     </div>
                   </div>
